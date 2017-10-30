@@ -1,35 +1,5 @@
-#bg
+body
 {
-    position: fixed;
-    z-index: 0;
-    top: -50%;
-    left: -50%;
-
-    width: 200%;
-    height: 200%;
-}
-#bg img
-{
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-
-    min-width: 50%;
-    min-height: 50%;
-    margin: auto;
-}
-
-#webpage
-{
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -39,10 +9,6 @@
         flex-direction: column;
 
     min-height: 100vh;
-}
-
-body
-{
     margin: 0;
 }
 
