@@ -1,0 +1,25 @@
+{
+  "name": "Chores",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "connect-session-knex": "^1.4.0",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-ejs-layouts": "^2.3.1",
+    "express-session": "^1.15.6",
+    "knex": "^0.13.0",
+    "pg": "^7.3.0",
+    "serve-favicon": "^2.4.5"
+  }
+}
