@@ -4,9 +4,10 @@ module.exports = function(app){
 
   app.get('/', main.index);
 
-  // app.get('/login', main.renderLogin);
+  app.get('/register', main.registerPage);
 
-  // app.post('/login', main.login);
+
+  app.post('/register', main.register);
 
   app.use(userAuth);
 
