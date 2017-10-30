@@ -1,7 +1,7 @@
 <%- contentFor('body') %>
 <div class="container">
   <div class="row">
-    <form class="col s12">
+    <form class="col s12" action="/register" method="POST">
       <h3>Register</h3>
       <div class="row">
         <div class="input-field">
@@ -20,6 +20,9 @@
           <input id="password" type="password" name="password" class="validate">
           <label for="password">Password</label>
         </div>
+      </div>
+      <div class="row">
+        <button class="btn" type="submit">Submit<i class="material-icons right">send</i></button>
       </div>
     </form>
   </div>
