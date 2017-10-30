@@ -9,7 +9,7 @@ module.exports = function(app){
   });
 
   app.use(session({
-      secret: 'domo arigato',
+      secret: 'wyatt sonya tintin',
       cookie: {
           maxAge: 2592000 // 30 days
       },
