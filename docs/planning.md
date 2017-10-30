@@ -15,7 +15,6 @@ id
 username
 password
 name
-gender
 family_id
 
 ### chores
@@ -31,3 +30,4 @@ child_id
 id
 timestamp
 chore_id
+is_approved (boolean)
