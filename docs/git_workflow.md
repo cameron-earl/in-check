@@ -26,3 +26,6 @@ git push origin feature-branch
 git checkout master
 git pull
 git branch -d feature-branch
+
+## Push to heroku
+git push heroku master
