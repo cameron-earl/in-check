@@ -9,5 +9,4 @@ module.exports = {
       res.render('pages/index', message);
     });
   },
-  //full example: galvanize/q2/projects/travelDash
 }
