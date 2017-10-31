@@ -24,7 +24,7 @@ module.exports = function(app){
 }
 
 function childAuth(req, res, next) {
-  if(req.session.family && (req.session.child || req.session.parent) {
+  if(req.session.family && (req.session.child || req.session.parent)) {
     next();
   } else {
     req.session.message = "You need to log in!";
