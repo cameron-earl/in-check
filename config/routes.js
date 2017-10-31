@@ -11,13 +11,11 @@ module.exports = function(app){
 
   app.post('/register', main.register);
 
-
   app.post('/family', family.login);
 
   app.use(userAuth);
 
   app.get('/family', family.index);
-  
 
   app.post('/family/addChild', child.createChild);
 
@@ -26,7 +24,7 @@ module.exports = function(app){
 }
 
 function userAuth(req,res,next){
-  if(req.session.admin){
+  if(req.session.family){
     next();
   }else{
     req.session.message = "You are not authorized to view that page.";
