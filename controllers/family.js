@@ -123,33 +123,32 @@ module.exports = {
         .where('id', childID)
         .limit(1)
         .then((resultArr)=>{
-          let child = resultArr;
+          let child = resultArr[0];
           knex('chores')
-          .whereIn('child_id', childIds)
-          .then((mixedChores)=>{
+          .where('child_id', child.id)
+          .then((chores)=>{
             //get completed status of all chores
             //get approval status of all chores
-            for (let chore of mixedChores) {
+            for (let chore of chores) {
               chore.completed = false;
               chore.approved = false;
             }
-            let choreIds = mixedChores.map(c=>c.id);
+            let choreIds = chores.map(c=>c.id);
             knex('completed_chores')
               .whereIn('chore_id', choreIds)
-              .then((mixedCompletedChores)=>{
-                for (let completedChore of mixedCompletedChores) {
-                  let thisChore = mixedChores.find(c=>c.id===completedChore.chore_id);
+              .then((completedChores)=>{
+                for (let completedChore of completedChores) {
+                  let thisChore = chores.find(c=>c.id===completedChore.chore_id);
                   thisChore.completed = true;
                   thisChore.approved = completedChore.approved;
                 }
 
                 //add chores for each child to child object
-                for (let child of children) {
-                  child.chores = mixedChores.filter(chore=>chore.child_id===child.id);
-                }
-                returnObj.children = children;
+                child.chores = chores;
+
+                returnObj.child = child;
                 req.session.save(err => {
-                  res.render('pages/family', returnObj);
+                  res.render('pages/child_parent_view', returnObj);
                 });
               })
           })
@@ -162,5 +161,5 @@ module.exports = {
             res.redirect('/');
           });
         });
-      }   
+      }
 }
