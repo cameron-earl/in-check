@@ -2,6 +2,7 @@ const knex = require("../db/knex.js");
 const encryption = require('../config/encryption.js');
 
 module.exports = {
+
     login: function(req, res){
       knex('parents')
        .where('username', req.body.username)
@@ -43,15 +44,42 @@ module.exports = {
         message: req.session.message
       };
       req.session.message = null;
+
       let family = req.session.family;
       knex('children')
         .where('family_id', family)
-        .then((resultArr)=>{
-          let children = resultArr;
-          req.session.save(err => {
-            res.render('family', message);
-          });
+        .then((children)=>{
+          //get chores for children
+          let childIds = children.map(c=>c.id);
+          knex('chores')
+          .whereIn('child_id', childIds)
+          .then((mixedChores)=>{
+            //get completed status of all chores
+            //get approval status of all chores
+            for (let chore of mixedChores) {
+              chore.completed = false;
+              chore.approved = false;
+            }
+            let choreIds = mixedChores.map(c=>c.id);
+            knex('completed_chores')
+              .whereIn('chore_id', choreIds)
+              .then((mixedCompletedChores)=>{
+                for (let completedChore of mixedCompletedChores) {
+                  let thisChore = mixedChores.find(c=>c.id===completedChore.chore_id);
+                  thisChore.completed = true;
+                  thisChore.approved = completedChore.approved;
+                }
 
+                //add chores for each child to child object
+                for (let child of children) {
+                  child.chores = mixedChores.filter(chore=>chore.child_id===child.id);
+                }
+                let returnObj.children = children;
+                req.session.save(err => {
+                  res.render('family', returnObj);
+                });
+              })
+          })
         })
         .catch((err) => {
           console.log(err);
