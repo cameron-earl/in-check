@@ -1,0 +1,62 @@
+<%- contentFor('body') %>
+
+<div class="center-align">
+    <h3><%= child.first_name %></h3>
+    <table class="bordered">
+      <thead>
+          <tr>
+              <th>Chore</th>
+              <th>Description</th>
+              <th>Start</th>
+              <th>Completion Date</th>
+              <th>Weekly Chores</th>
+              <th>Value</th>
+              <th>Completed</th>
+              <th>Approved</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% for(let chore of child.chores){ %>
+            <tr>
+              <td><%= chore.title %></td>
+              <td><%= chore.description %></td>
+              <td><%= chore.start_date %></td>
+              <td><%= chore.end_date %></td>
+              <td><%= chore.recur_weekly %></td>
+              <td><%= chore.value %></td>
+              <td><%= chore.approved %></td>
+              <td><%= chore.completed %></td>
+            </tr>
+          <% } %>
+    </table>
+
+    <div class="row">
+      <form class="col s12 m6 offset-m3" action="/family/addChild" method="post">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="first_name" type="text" name="first_name" class="validate" required>
+            <label for="first_name">First Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="username" name="username" type="text" class="validate" required>
+            <label for="username">Username</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="password" type="password" name="password" class="validate" required>
+            <label for="password">Password</label>
+          </div>
+        </div>
+        <div class="row">
+          <button type="submit" class="waves-effect waves-light btn-large" type="submit">Let's Make a Child<i class="material-icons right">add_circle</i></button>
+        </div>
+      </form>
+
+
+    </div>
+
+</div>

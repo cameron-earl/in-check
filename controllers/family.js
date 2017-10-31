@@ -111,5 +111,55 @@ module.exports = {
           });
         });
 
-    }
+    },
+    viewChild: function(req, res){
+      let childID = req.params.id;
+      let returnObj = {
+        message: req.session.message
+      };
+      req.session.message = null;
+      let family = req.session.family;
+      knex('children')
+        .where('id', childID)
+        .limit(1)
+        .then((resultArr)=>{
+          let child = resultArr[0];
+          knex('chores')
+          .where('child_id', child.id)
+          .then((chores)=>{
+            //get completed status of all chores
+            //get approval status of all chores
+            for (let chore of chores) {
+              chore.completed = false;
+              chore.approved = false;
+            }
+            let choreIds = chores.map(c=>c.id);
+            knex('completed_chores')
+              .whereIn('chore_id', choreIds)
+              .then((completedChores)=>{
+                for (let completedChore of completedChores) {
+                  let thisChore = chores.find(c=>c.id===completedChore.chore_id);
+                  thisChore.completed = true;
+                  thisChore.approved = completedChore.approved;
+                }
+
+                //add chores for each child to child object
+                child.chores = chores;
+
+                returnObj.child = child;
+                req.session.save(err => {
+                  res.render('pages/child_parent_view', returnObj);
+                });
+              })
+          })
+        })
+        .catch((err) => {
+          console.log(err);
+          req.session.message = "Our website had an error. Please try again."
+          req.session.family = null;
+          req.session.save(err=>{
+            res.redirect('/');
+          });
+        });
+      }
 }
