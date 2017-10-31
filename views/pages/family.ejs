@@ -1,0 +1,53 @@
+<%- contentFor('body') %>
+
+<% for(let i = 0; i <children.length; i++){ %>
+  <div class="row">
+         <div class="col s12 m6">
+           <div class="card">
+             <div class="card-image">
+               <img src="">
+               <span class="card-title"><%= children[i].first_name %></span>
+             </div>
+             <div class="card-content">
+                <ol>
+                  <% for(let j = 0; j < children; j++){ %>
+                     <li class = "<%=children[j].completed ? "completed": "" %>"><%= children[j].title %></li>
+                  <% } %>
+                </ol>
+             </div>
+           </div>
+         </div>
+       </div>
+  <% } %>
+
+
+  <div class="center-align">
+    <a href="" class="waves-effect waves-light btn-large"><i class="material-icons left">person_add</i>Add Childern</a>
+  </div>
+
+  <div class="row">
+    <form class="col s6" action="/family/addChild" method="post">
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="username" id="username" name="username" type="text" class="validate" required>
+          <label for="username">Username</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" name="password" class="validate" required>
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="first_name" type="first_name" name="first_name" class="validate" required>
+          <label for="first_name">First Name</label>
+        </div>
+      </div>
+    </form>
+    <div class="center-align">
+      <a href="" class="waves-effect waves-light btn-large"><i class="material-icons left">add_circle</i>Add</a>
+    </div>
+
+  </div>
