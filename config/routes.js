@@ -1,5 +1,6 @@
 const main = require("../controllers/main.js");
 const family = require("../controllers/family.js");
+const child = require("../controllers/child.js");
 
 
 module.exports = function(app){
@@ -8,12 +9,17 @@ module.exports = function(app){
 
   app.get('/register', main.registerPage);
 
-
   app.post('/register', main.register);
+
 
   app.post('/family', family.login);
 
+  app.use(userAuth);
+
   app.get('/family', family.index);
+  
+
+  app.post('/family/addChild', child.createChild);
 
   app.use(userAuth);
 
