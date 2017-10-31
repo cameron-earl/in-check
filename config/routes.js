@@ -13,7 +13,11 @@ module.exports = function(app){
 
   app.post('/family', family.login);
 
+  app.post('/child', children.login);
+
   app.use(childAuth)
+
+  app.get('/child', children.index);
 
   app.use(parentAuth);
 
