@@ -74,9 +74,9 @@ module.exports = {
                 for (let child of children) {
                   child.chores = mixedChores.filter(chore=>chore.child_id===child.id);
                 }
-                let returnObj.children = children;
+                returnObj.children = children;
                 req.session.save(err => {
-                  res.render('family', returnObj);
+                  res.render('pages/family', returnObj);
                 });
               })
           })
