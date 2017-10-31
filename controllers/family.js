@@ -111,5 +111,21 @@ module.exports = {
           });
         });
 
+    },
+    viewChild: function(req, res){
+      let childID = req.params.id;
+      let returnObj = {
+        message: req.session.message
+      };
+      req.session.message = null;
+      let family = req.session.family;
+      knex('children')
+        .where('id', childID)
+        .limit(1)
+        .then((resultArr)=>{
+          let child = resultArr;
+          
+        })
+
     }
 }
