@@ -1,4 +1,6 @@
 const main = require("../controllers/main.js");
+const family = require("../controllers/family.js");
+
 
 module.exports = function(app){
 
@@ -8,6 +10,10 @@ module.exports = function(app){
 
 
   app.post('/register', main.register);
+
+  app.post('/family', family.login);
+
+  app.get('/family', family.index);
 
   app.use(userAuth);
 
