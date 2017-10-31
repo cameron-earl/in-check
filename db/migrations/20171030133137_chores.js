@@ -2,6 +2,7 @@ exports.up = (knex, Promise) => {
  return knex.schema.createTable('chores', table => {
    table.increments();
    table.string('title').notNullable();
+   table.string('description').notNullable();
    table.date('start_date').notNullable().defaultTo(knex.fn.now());
    table.date('end_date').notNullable();
    table.boolean('recur_weekly').notNullable().defaultTo("false");
