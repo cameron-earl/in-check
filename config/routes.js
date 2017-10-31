@@ -19,7 +19,7 @@ module.exports = function(app){
 
   app.get('/family', family.index);
 
-  app.post('/family/addChild', child.createChild);
+  app.post('/family/addChild', family.createChild);
 
 }
 
