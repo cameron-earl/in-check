@@ -1,4 +1,9 @@
 <%- contentFor('body') %>
+
+<% if (message) { %>
+  <% include ../partials/error.ejs %>
+<% } %>
+
 <div class="row">
    <form class="col s6" action="/child" method="post">
      <h3>Child Login</h3>
