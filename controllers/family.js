@@ -124,8 +124,43 @@ module.exports = {
         .limit(1)
         .then((resultArr)=>{
           let child = resultArr;
-          
-        })
+          knex('chores')
+          .whereIn('child_id', childIds)
+          .then((mixedChores)=>{
+            //get completed status of all chores
+            //get approval status of all chores
+            for (let chore of mixedChores) {
+              chore.completed = false;
+              chore.approved = false;
+            }
+            let choreIds = mixedChores.map(c=>c.id);
+            knex('completed_chores')
+              .whereIn('chore_id', choreIds)
+              .then((mixedCompletedChores)=>{
+                for (let completedChore of mixedCompletedChores) {
+                  let thisChore = mixedChores.find(c=>c.id===completedChore.chore_id);
+                  thisChore.completed = true;
+                  thisChore.approved = completedChore.approved;
+                }
 
-    }
+                //add chores for each child to child object
+                for (let child of children) {
+                  child.chores = mixedChores.filter(chore=>chore.child_id===child.id);
+                }
+                returnObj.children = children;
+                req.session.save(err => {
+                  res.render('pages/family', returnObj);
+                });
+              })
+          })
+        })
+        .catch((err) => {
+          console.log(err);
+          req.session.message = "Our website had an error. Please try again."
+          req.session.family = null;
+          req.session.save(err=>{
+            res.redirect('/');
+          });
+        });
+      }   
 }
