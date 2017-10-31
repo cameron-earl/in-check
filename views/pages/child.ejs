@@ -1,14 +1,35 @@
 <%- contentFor('body') %>
 
-<div>
-  <ul class="collection">
-    <% for(let i = 0; i <chores.length; i++){ %>
-      <li class="collection-item avatar">
-        <i class="material-icons circle">folder</i>
-        <span class="title">chores[i].title</span>
-         <p>chores[i].description</p>
-        <a href="" class="secondary-content"><i class="material-icons">grade</i></a>
-      </li>
-    <% } %>
-  </ul>
+
+<div class= "container">
+  <h1><%= child.first_name %>: Chores</h1>
+
+  <table class="bordered">
+        <thead>
+          <tr>
+              <th>Chore</th>
+              <th>Description</th>
+              <th>Start</th>
+              <th>Completion Date</th>
+              <th>Weekly Chores</th>
+              <th>Value</th>
+              <th>Completed</th>
+              <th>Approved</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% for(let i = 0; i <chores.length; i++){ %>
+            <tr>
+              <td><%= chores[i].title %></td>
+              <td><%= chores[i].description %></td>
+              <td><%= chores[i].start_date %></td>
+              <td><%= chores[i].end_date %></td>
+              <td><%= chores[i].recur_weekly %></td>
+              <td><%= chores[i].value %></td>
+              <td><%= chores[i].approved %></td>
+              <td><%= chores[i].completed %></td>
+            </tr>
+          <% } %>
+      </table>
 </div>

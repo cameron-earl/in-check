@@ -40,57 +40,56 @@ module.exports = {
      });
   },
 
-  index: function(req, res) {
-    let returnObj = {
-      message: req.session.message
-    };
-    req.session.message = null;
+  index: function(req, res){
+     let childID = req.session.child;
+     let returnObj = {
+       message: req.session.message
+     };
+     req.session.message = null;
 
-    let child = req.session.child;
-    knex('chores')
-      .where('child_id', child)
-      .then((children)=>{
-        //get chores for children
-        let childIds = children.map(c=>c.id);
-        knex('chores')
-        .whereIn('child_id', childIds)
-        .then((mixedChores)=>{
-          //get completed status of all chores
-          //get approval status of all chores
-          for (let chore of mixedChores) {
-            chore.completed = false;
-            chore.approved = false;
-          }
-          let choreIds = mixedChores.map(c=>c.id);
-          knex('completed_chores')
-            .whereIn('chore_id', choreIds)
-            .then((mixedCompletedChores)=>{
-              for (let completedChore of mixedCompletedChores) {
-                let thisChore = mixedChores.find(c=>c.id===completedChore.chore_id);
-                thisChore.completed = true;
-                thisChore.approved = completedChore.approved;
-              }
+     knex('children')
+       .where('id', childID)
+       .limit(1)
+       .then((resultArr)=>{
+         let child = resultArr[0];
+         knex('chores')
+         .where('child_id', child.id)
+         .then((chores)=>{
+           //get completed status of all chores
+           //get approval status of all chores
+           for (let chore of chores) {
+             chore.completed = false;
+             chore.approved = false;
+           }
+           let choreIds = chores.map(c=>c.id);
+           knex('completed_chores')
+             .whereIn('chore_id', choreIds)
+             .then((completedChores)=>{
+               for (let completedChore of completedChores) {
+                 let thisChore = chores.find(c=>c.id===completedChore.chore_id);
+                 thisChore.completed = true;
+                 thisChore.approved = completedChore.approved;
+               }
 
-              //add chores for each child to child object
-              for (let child of children) {
-                child.chores = mixedChores.filter(chore=>chore.child_id===child.id);
-              }
-              returnObj.children = children;
-              req.session.save(err => {
-                res.render('pages/family', returnObj);
-              });
-            })
-        })
-      })
-      .catch((err) => {
-        console.log(err);
-        req.session.message = "Our website had an error. Please try again."
-        req.session.family = null;
-        req.session.save(err=>{
-          res.redirect('/');
-        });
-      });
+               //add chores for each child to child object
+               returnObj.chores = chores;
 
-  },
+               returnObj.child = child;
+               req.session.save(err => {
+                 res.render('pages/child', returnObj);
+               });
+             })
+         })
+       })
+       .catch((err) => {
+         console.log(err);
+         req.session.message = "Our website had an error. Please try again."
+         req.session.family = null;
+         req.session.save(err=>{
+           res.redirect('/');
+         });
+       });
+     }
+
 
 }
