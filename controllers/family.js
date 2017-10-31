@@ -14,6 +14,7 @@ module.exports = {
              .then((isValid) => {
                if (isValid) {
                  req.session.family = user.family_id;
+                 req.session.parent = true;
                  req.session.save(err=>{
                    res.redirect('/family');
                  });
