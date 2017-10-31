@@ -1,0 +1,14 @@
+<%- contentFor('body') %>
+
+<div>
+  <ul class="collection">
+    <% for(let i = 0; i <chores.length; i++){ %>
+      <li class="collection-item avatar">
+        <i class="material-icons circle">folder</i>
+        <span class="title">chores[i].title</span>
+         <p>chores[i].description</p>
+        <a href="" class="secondary-content"><i class="material-icons">grade</i></a>
+      </li>
+    <% } %>
+  </ul>
+</div>
