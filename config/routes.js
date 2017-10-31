@@ -13,21 +13,32 @@ module.exports = function(app){
 
   app.post('/family', family.login);
 
-  app.use(userAuth);
+  app.use(childAuth)
+
+  app.use(parentAuth);
 
   app.get('/family', family.index);
 
   app.post('/family/addChild', child.createChild);
 
-  app.use(userAuth);
-
 }
 
-function userAuth(req,res,next){
-  if(req.session.family){
+function childAuth(req, res, next) {
+  if(req.session.family && (req.session.child || req.session.parent) {
     next();
-  }else{
-    req.session.message = "You are not authorized to view that page.";
+  } else {
+    req.session.message = "You need to log in!";
+    req.session.save(err => {
+      res.redirect('/');
+    })
+  }
+}
+
+function parentAuth(req, res, next) {
+  if(req.session.family && req.session.parent) {
+    next();
+  } else {
+    req.session.message = "You must be logged in as a parent to access this page.";
     req.session.save(err => {
       res.redirect('/');
     })
