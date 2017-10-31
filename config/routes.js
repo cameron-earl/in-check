@@ -13,7 +13,11 @@ module.exports = function(app){
 
   app.post('/family', family.login);
 
+  app.post('/child', children.login);
+
   app.use(childAuth)
+
+  app.get('/child', children.index);
 
   app.use(parentAuth);
 
@@ -24,7 +28,7 @@ module.exports = function(app){
 }
 
 function childAuth(req, res, next) {
-  if(req.session.family && (req.session.child || req.session.parent) {
+  if(req.session.family && (req.session.child || req.session.parent)) {
     next();
   } else {
     req.session.message = "You need to log in!";
