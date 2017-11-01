@@ -4,7 +4,7 @@ const encryption = require('../config/encryption.js');
 module.exports = {
 
   index: function(req, res){
-     let childID = req.session.child;
+     let childID = req.session.user;
      let returnObj = {
        message: req.session.message
      };
