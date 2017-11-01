@@ -33,6 +33,52 @@
             </tr>
           <% } %>
     </table>
+    <a class="waves-effect waves-light btn modal-trigger" href="#modal3">Edit chore<i class="material-icons right">edit</i></a>
+    <div id="modal3" class="modal">
+    <div class="modal-content">
+      <div class="center-align">
+      <div class="row">
+        <form class="col s12 m6 offset-m3" action="/family/children/LINKTOEDITCHORES" method="post">
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="title" type="text" name="title" class="validate" tabindex="1" value="">
+              <label for="title">Title</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="description" name="description" type="text" tabindex="2" value="">
+              <label for="description">Description (optional)</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="value" type="number" name="value" value="0" tabindex="3" value="">
+              <label for="value">Value</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12" tabindex="-1">
+              <input id="start_date" type="text" class="datepicker" name="start_date" tabindex="-1">
+              <label for="start_date">Start Date (optional)</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12" tabindex="-1">
+              <input id="end_date" type="text" class="datepicker" name="end_date" tabindex="-1">
+              <label for="end_date">End Date (optional)</label>
+            </div>
+          </div>
+          <input type="text" name="child_id" value="<%= child.id %>" hidden>
+          <button class="btn" type="submit" tabindex="4">Update</button>
+        </form>
+
+    </div>
+    </div>
+
+    </div>
+    </div>
+
     <a class="waves-effect waves-light btn modal-trigger" href="#modal2">Add Chore<i class="material-icons right">add</i></a>
     <div id="modal2" class="modal">
     <div class="modal-content">
@@ -105,7 +151,7 @@
             </div>
           </div>
           <input type="text" name="child_id" value="<%= child.id %>" hidden>
-          <button class="btn" type="submit" tabindex="4">Edit Child</button>
+          <button class="btn" type="submit" tabindex="4">Update</button>
         </form>
     </div>
   </div>
