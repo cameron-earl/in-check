@@ -10,7 +10,7 @@ exports.up = (knex, Promise) => {
    table.integer('child_id')
     .notNullable()
     .references('id')
-    .inTable('children')
+    .inTable('users')
     .onDelete('CASCADE')
     .index();
    table.timestamps(true, true);
