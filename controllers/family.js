@@ -138,11 +138,44 @@ module.exports = {
         req.session.message = null;
 
         knex('users')
-          .where('id', 'req.body.child_id')
-
+          .where('id', req.params.id)
+          .limit(1)
+          .then(resultArr=>{
+            returnObj.child = resultArr[0];
+            res.render('pages/editChild', returnObj);
+          })
+          .catch((err) => {
+            console.log(err);
+            req.session.message = "Our website had an error. Please try again.";
+            req.session.save(err=>{
+              res.redirect('/family');
+            });
+          });
       },
 
-      editChild: function(req, res) {},
+      editChild: function(req, res) {
+        let child = {};
+        // set child properties to those that were sent in
+        for (let key in req.body) {
+          if (req.body[key].length) child[key] = req.body[key];
+        }
+        knex('users')
+          .update(child)
+          .where('id',child.id)
+          .then(()=>{
+            req.session.save(err=>{
+              res.redirect('/family/children/'+child.id);
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            req.session.message = "Our website had an error. Please try again.";
+            req.session.save(err=>{
+              res.redirect('/family/children/'+child.id);
+            });
+          });
+
+      },
 
       deleteChild: function(req, res) {},
 

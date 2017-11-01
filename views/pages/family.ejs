@@ -1,5 +1,9 @@
 <%- contentFor('body') %>
 
+<% if (message) { %>
+  <% include ../partials/error.ejs %>
+<% } %>
+
 <script type="text/javascript" src="/js/family.js" defer></script>
 
 <% for(let i = 0; i <children.length; i++){ %>
