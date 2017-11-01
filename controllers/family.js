@@ -131,7 +131,16 @@ module.exports = {
         });
       },
 
-      editChildPage: function(req, res) {},
+      editChildPage: function(req, res) {
+        let returnObj = {
+          message: req.session.message
+        };
+        req.session.message = null;
+
+        knex('users')
+          .where('id', 'req.body.child_id')
+
+      },
 
       editChild: function(req, res) {},
 
