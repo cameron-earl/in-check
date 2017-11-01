@@ -23,7 +23,9 @@ module.exports = function(app){
 
   app.get('/family/children/:id', family.viewChild);
 
-  app.post('/family/addChild', family.createChild);
+  app.post('/family/children/add', family.createChild);
+
+  app.post('/family/chores/add', family.createChore);
 
 }
 

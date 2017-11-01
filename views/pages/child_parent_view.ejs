@@ -1,5 +1,7 @@
 <%- contentFor('body') %>
 
+<script type="text/javascript" src="/js/child-parent-view.js" defer></script>
+
 <div class="center-align">
     <h3><%= child.first_name %></h3>
     <table class="bordered">
@@ -32,28 +34,39 @@
     </table>
 
     <div class="row">
-      <form class="col s12 m6 offset-m3" action="/family/addChild" method="post">
+      <form class="col s12 m6 offset-m3" action="/family/chores/add" method="post">
         <div class="row">
           <div class="input-field col s12">
-            <input id="first_name" type="text" name="first_name" class="validate" required>
-            <label for="first_name">First Name</label>
+            <input id="title" type="text" name="title" class="validate" required>
+            <label for="title">Title</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="username" name="username" type="text" class="validate" required>
-            <label for="username">Username</label>
+            <input id="description" name="description" type="text">
+            <label for="description">Description (optional)</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="password" type="password" name="password" class="validate" required>
-            <label for="password">Password</label>
+            <input id="start_date" type="text" class="datepicker" name="start_date" required>
+            <label for="start_date">Start Date</label>
           </div>
         </div>
         <div class="row">
-          <button type="submit" class="waves-effect waves-light btn-large" type="submit">Let's Make a Child<i class="material-icons right">add_circle</i></button>
+          <div class="input-field col s12">
+            <input id="end_date" type="text" class="datepicker" name="end_date">
+            <label for="end_date">End Date</label>
+          </div>
         </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="value" type="number" name="value" class="validate">
+            <label for="value">Value</label>
+          </div>
+        </div>
+        <input type="text" name="child_id" value="<%= child.id %>" hidden>
+        <button class="btn" type="submit">Add Chore</button>
       </form>
 
 
