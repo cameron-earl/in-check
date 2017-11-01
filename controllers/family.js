@@ -111,7 +111,9 @@ module.exports = {
 
                 //add chores for each child to child object
                 child.chores = chores;
-
+                for (let chore of child.chores) {
+                  console.log(JSON.stringify());
+                }
                 returnObj.child = child;
                 req.session.save(err => {
                   res.render('pages/child_parent_view', returnObj);
@@ -128,6 +130,12 @@ module.exports = {
           });
         });
       },
+
+      editChildPage: function(req, res) {},
+
+      editChild: function(req, res) {},
+
+      deleteChild: function(req, res) {},
 
       createChore: function(req, res) {
         let childId = req.body.child_id;
@@ -157,5 +165,9 @@ module.exports = {
               res.redirect(path);
             });
           });
-      }
+      },
+
+      editChore: function(req, res) {},
+
+      deleteChore: function(req, res) {}
 }
