@@ -2,6 +2,7 @@ const knex = require("../db/knex.js");
 const encryption = require('../config/encryption.js');
 
 module.exports = {
+  
   index: function(req, res) {
     let message = {
       message: req.session.message
@@ -27,7 +28,6 @@ module.exports = {
             name: req.body.name
           }, '*')
           .then((result) => {
-            console.log(result);
             knex('users')
               .insert({
                 username: req.body.username,
@@ -51,7 +51,6 @@ module.exports = {
   },
 
   login: function(req, res) {
-    console.log('bark bark bark!')
     knex('users')
       .where('username', req.body.username)
       .limit(1)
@@ -89,5 +88,6 @@ module.exports = {
           res.redirect('/');
         });
       });
-  },
+  }
+
 }

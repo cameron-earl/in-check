@@ -57,25 +57,27 @@ module.exports = {
 
     },
     createChild: function(req, res){
-      knex('users')
-        .insert({
-          first_name: req.body.first_name,
-          username: req.body.username,
-          password: req.body.password,
-          family_id: req.session.family
-        })
-        .then(()=>{
-          res.redirect('/family')
-        })
-        .catch((err) => {
-          console.log(err);
-          req.session.message = "No babies made"
-          req.session.save(err=>{
-            res.redirect('/family');
-          });
+      encryption.hash(req.body).then(encryptedUser=>{
+        knex('users')
+          .insert({
+            first_name: encryptedUser.first_name,
+            username: encryptedUser.username,
+            password: encryptedUser.password,
+            family_id: req.session.family
+          })
+          .then(()=>{
+            res.redirect('/family')
+          })
+      })
+      .catch((err) => {
+        console.log(err);
+        req.session.message = "There was a problem. You'll have to keep trying to make a baby."
+        req.session.save(err=>{
+          res.redirect('/family');
         });
-
+      });
     },
+
     viewChild: function(req, res){
       let childID = req.params.id;
       let returnObj = {
