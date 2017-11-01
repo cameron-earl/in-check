@@ -17,6 +17,10 @@ module.exports = function(app){
 
   app.get('/child', child.index);
 
+  app.get('/chore/incomplete/:id', child.incomplete);
+
+  app.get('/chore/complete/:id', child.complete);
+
   app.use(parentAuth);
 
   app.get('/family', family.index);
