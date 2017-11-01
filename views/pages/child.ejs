@@ -14,7 +14,7 @@
               <th>Weekly Chores</th>
               <th>Value</th>
               <th>Completed</th>
-              <th>Approved</th>
+
           </tr>
         </thead>
 
@@ -27,9 +27,30 @@
               <td><%= chores[i].end_date %></td>
               <td><%= chores[i].recur_weekly %></td>
               <td><%= chores[i].value %></td>
-              <td><%= chores[i].approved %></td>
-              <td><%= chores[i].completed %></td>
+              <td><a href="<%=chores[i].completed ? `/chore/incomplete/${chores[i].id}`: `/chore/complete/${chores[i].id}` %>"><input type="checkbox" class= "" <%= chores[i].completed ? checked = "checked": ""%> ><label></label></a></td>
             </tr>
           <% } %>
       </table>
+</div>
+
+<div class="container">
+  <h2>Completed Chores</h2>
+  <table class="bordered">
+    <thead>
+      <tr>
+          <th>Chore</th>
+          <th>Approved</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let i = 0; i <chores.length; i++){ %>
+        <% if(chores[i].approved === true){ %>
+        <tr>
+          <td><%= chores[i].title %></td>
+          <td><%= chores[i].approved %></td>
+        </tr>
+      <% } %>
+      <% } %>
+    <tbody>
+  </table>
 </div>
