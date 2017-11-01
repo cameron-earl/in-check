@@ -52,6 +52,43 @@ module.exports = {
            res.redirect('/');
          });
        });
+     },
+
+     incomplete: function(req, res){
+       knex('completed_chores')
+       .del()
+       .where(
+         "chore_id", req.params.id
+       )
+       .limit(1)
+       .then(()=>{
+         res.redirect('/child');
+       })
+       .catch((err) => {
+         console.log(err);
+         req.session.message = "ERROR"
+         req.session.save(err=>{
+           res.redirect('/child');
+         });
+       });
+
+     },
+
+     complete: function(req, res){
+       knex('completed_chores')
+       .insert({
+        chore_id: req.params.id
+       })
+       .then(()=>{
+         res.redirect('/child');
+       })
+       .catch((err) => {
+         console.log(err);
+         req.session.message = "ERROR"
+         req.session.save(err=>{
+           res.redirect('/child');
+         });
+       });
      }
 
 
