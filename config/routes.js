@@ -25,7 +25,17 @@ module.exports = function(app){
 
   app.post('/family/children/add', family.createChild);
 
+  app.get('/family/children/edit/:id', family.editChildPage);
+
+  app.post('/family/children/edit/:id', family.editChild);
+
+  app.get('/family/children/delete/:id', family.deleteChild);
+
   app.post('/family/chores/add', family.createChore);
+
+  app.post('/family/chores/edit/:id', family.editChore);
+
+  app.get('/family/chores/delete/:id', family.deleteChore);
 
 }
 
