@@ -23,3 +23,7 @@ footer.page-footer
 {
     padding-top: 0;
 }
+
+i.icon-red {
+    color: red;
+}
