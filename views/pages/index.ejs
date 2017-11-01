@@ -5,27 +5,9 @@
 <% } %>
 
 <div class="row">
-   <form class="col s6" action="/child" method="post">
-     <h3>Child Login</h3>
-     <div class="row">
-       <div class="input-field col s12">
-         <input placeholder="Placeholder" id="username" name="username" type="text" class="validate">
-         <label for="username">Username</label>
-       </div>
-     </div>
-     <div class="row">
-       <div class="input-field col s12">
-         <input id="password" type="password" name="password" class="validate">
-         <label for="password">Password</label>
-       </div>
-     </div>
-     <div class="row">
-       <button class="btn" type="submit">Log In<i class="material-icons right">send</i></button>
-     </div>
-   </form>
 
-   <form class="col s6" action="/family" method="post">
-     <h3>Parent Login</h3>
+   <form class="col s12 m6 offset-m3" action="/login" method="post">
+     <h3>Login</h3>
      <div class="row">
        <div class="input-field col s12">
          <input placeholder="Placeholder" id="username" name="username" type="text" class="validate">

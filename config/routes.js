@@ -11,9 +11,7 @@ module.exports = function(app){
 
   app.post('/register', main.register);
 
-  app.post('/family', family.login);
-
-  app.post('/child', child.login);
+  app.post('/login', main.login);
 
   app.use(childAuth)
 
@@ -30,7 +28,7 @@ module.exports = function(app){
 }
 
 function childAuth(req, res, next) {
-  if(req.session.family && (req.session.child || req.session.parent)) {
+  if(req.session.auth) {
     next();
   } else {
     req.session.message = "You need to log in!";
@@ -41,7 +39,7 @@ function childAuth(req, res, next) {
 }
 
 function parentAuth(req, res, next) {
-  if(req.session.family && req.session.parent) {
+  if(req.session.auth === "parent") {
     next();
   } else {
     req.session.message = "You must be logged in as a parent to access this page.";

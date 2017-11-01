@@ -3,43 +3,6 @@ const encryption = require('../config/encryption.js');
 
 module.exports = {
 
-    login: function(req, res){
-      knex('parents')
-       .where('username', req.body.username)
-       .limit(1)
-       .then((resultArr) => {
-         let user = resultArr[0];
-         if (user) {
-           encryption.check(user, req.body)
-             .then((isValid) => {
-               if (isValid) {
-                 req.session.family = user.family_id;
-                 req.session.parent = true;
-                 req.session.save(err=>{
-                   res.redirect('/family');
-                 });
-               } else {
-                 req.session.message = "You entered an invalid username or password.";
-                 req.session.save(err=>{
-                   res.redirect('/');
-                 });
-               }
-             })
-         } else {
-           req.session.message = "You entered an invalid username or password."
-           req.session.save(err=>{
-             res.redirect('/');
-           });
-         }
-       }).catch((err) => {
-         console.log(err);
-         req.session.message = "Our website had an error. Please try again."
-         req.session.save(err=>{
-           res.redirect('/');
-         });
-       });
-    },
-
     index: function(req, res) {
       let returnObj = {
         message: req.session.message
@@ -47,8 +10,9 @@ module.exports = {
       req.session.message = null;
 
       let family = req.session.family;
-      knex('children')
+      knex('users')
         .where('family_id', family)
+        .andWhere('is_parent', false)
         .then((children)=>{
           //get chores for children
           let childIds = children.map(c=>c.id);
@@ -94,7 +58,7 @@ module.exports = {
     },
     createChild: function(req, res){
       encryption.hash(req.body).then(encryptedUser=>{
-        knex('children')
+        knex('users')
           .insert({
             first_name: encryptedUser.first_name,
             username: encryptedUser.username,
@@ -121,7 +85,7 @@ module.exports = {
       };
       req.session.message = null;
       let family = req.session.family;
-      knex('children')
+      knex('users')
         .where('id', childID)
         .limit(1)
         .then((resultArr)=>{
