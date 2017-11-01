@@ -127,5 +127,35 @@ module.exports = {
             res.redirect('/');
           });
         });
+      },
+
+      createChore: function(req, res) {
+        let childId = req.body.child_id;
+        console.log(JSON.stringify(req.body, null, 2));
+        let insertObj = {
+          title: req.body.title,
+          description: req.body.description,
+          value: req.body.value,
+          child_id: childId
+        };
+
+        if (req.body.start_date !== "") insertObj.start_date = req.body.start_date;
+        if (req.body.end_date !== "") insertObj.end_date = req.body.end_date;
+
+        knex('chores')
+          .insert(insertObj, '*')
+          .then((result)=>{
+            req.session.save(err=>{
+              res.redirect('/family/children/' + childId );
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            req.session.message = "Error adding chore. Please try again."
+            req.session.save(err=>{
+              let path = '/family' + (childId ? `/children/${childId}` : '');
+              res.redirect(path);
+            });
+          });
       }
 }
