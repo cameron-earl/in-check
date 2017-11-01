@@ -1,0 +1,25 @@
+<%- contentFor('body') %>
+
+<div class="row">
+  <form class="col s12 m6 offset-m3" action="/family/children/edit/<%= child.id %>" method="post">
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="first_name" type="text" name="first_name" class="validate" tabindex="1" value="child.first_name">
+        <label for="username">First Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="username" type="text" name="username" class="validate" tabindex="1" value="child.username">
+        <label for="username">Username</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="password" type="password" name="" value="0" tabindex="3" value="child.password">
+        <label for="value">Reset Password</label>
+      </div>
+    </div>
+    <input type="text" name="child_id" value="<%= child.id %>" hidden>
+    <button class="btn" type="submit" tabindex="4">Edit chore</button>
+  </form>
