@@ -4,26 +4,34 @@
   <% include ../partials/error.ejs %>
 <% } %>
 
+<script type="text/javascript" src="/js/register.js" defer></script>
+
 <div class="container">
   <div class="row">
     <form class="col s12" action="/register" method="POST">
       <h3>Register</h3>
       <div class="row">
         <div class="input-field col s12">
-          <input id="name" name="name" type="text" class="validate">
+          <input id="name" name="name" type="text" class="validate" required>
           <label for="name">Family Name</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="username" type="text" name="username" class="validate">
+          <input id="username" type="text" name="username" class="validate" required>
           <label for="username">Username</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" name="password" class="validate">
+          <input id="password" type="password" name="password" class="validate" required>
           <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password2" type="password" onchange="check(this)" class="validate" required>
+          <label for="password2">Confirm Password</label>
         </div>
       </div>
       <div class="row">

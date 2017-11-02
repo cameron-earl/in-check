@@ -12,17 +12,18 @@
 
 <div class="center-align">
   <h3><%= child.first_name %></h3>
-    
+
   <table class="bordered">
     <thead>
       <tr>
+        <th>Icon</th>
         <th>Chore</th>
         <th>Description</th>
         <th>Start</th>
-        <th>Completion Date</th>
+        <th>Deadline</th>
         <th>Value</th>
         <th>Completed</th>
-        <th>Approved</th>
+        <th>Approve</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
@@ -31,6 +32,7 @@
     <tbody>
       <% for(let chore of child.chores) { %>
         <tr>
+          <td></td>
           <td class="chore-title"><%= chore.title %></td>
           <td class="chore-description"><%= chore.description %></td>
           <td class="chore-start"><%= chore.start_date.toString().replace(/ \d{2}:.+$/,"") %></td>
