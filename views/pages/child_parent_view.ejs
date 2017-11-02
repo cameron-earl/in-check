@@ -47,21 +47,19 @@
   <a class="waves-effect waves-light btn modal-trigger" href="#edit-child-modal">Edit child<i class="material-icons right">edit</i></a>
   <a class="btn waves-effect waves-light modal-trigger red" href="#delete-child-modal">Delete Child<i class="material-icons right">delete</i></a>
 
-  <p><%= JSON.stringify(children) %></p>
-
   <div id="edit-chore-modal" class="modal">
     <div class="modal-content">
       <div class="center-align">
         <div class="row">
           <form class="col s12 m6 offset-m3" id="form-edit" action="" method="post">
-            <div class="row">
-              <div class="input-field col s12">
-                <select autofocus>
+            <div class="row black-text">
+              <div class="input-field col s12 black-text">
+                <select autofocus class="black-text">
                   <% for (let c of children) { %>
-                    <option value="<%= c.id %>" <% c.id === child.id ? "selected" : "" %><%= c.first_name %></option>
+                    <option class="black-text" value="<%= c.id %>" <% c.id === child.id ? "selected" : "" %><%= c.first_name %></option>
                   <% } %>
                 </select>
-                <label>Materialize Select</label>
+                <label>Change Assigned Child</label>
               </div>
             </div>
             <div class="row">
@@ -109,7 +107,7 @@
           <form class="col s12 m6 offset-m3" action="/family/<%= child.id %>/chores" method="post">
             <div class="row">
               <div class="input-field col s12">
-                <input id="add-title" type="text" name="title" class="validate" tabindex="1" required autofocus>
+                <input id="add-title" type="text" name="title" class="autocomplete validate" tabindex="1" required autofocus>
                 <label for="add-title">Title</label>
               </div>
             </div>
