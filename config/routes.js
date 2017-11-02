@@ -19,27 +19,27 @@ module.exports = function(app){
 
   app.get('/child', child.index);
 
-  app.get('/chore/incomplete/:id', child.incomplete);
+  app.get('/chore/incomplete/:chore', child.incomplete);
 
-  app.get('/chore/complete/:id', child.complete);
+  app.get('/chore/complete/:chore', child.complete);
 
   app.use(parentAuth);
 
   app.get('/family', family.index);
 
-  app.get('/family/children/:id', family.viewChild);
+  app.get('/family/:child', family.viewChild);
 
-  app.post('/family/children/add', family.createChild);
+  app.post('/family', family.createChild);
 
-  app.post('/family/children/edit/:id', family.editChild);
+  app.post('/family/edit/:child', family.editChild);
 
-  app.get('/family/children/delete/:id', family.deleteChild);
+  app.get('/family/delete/:child', family.deleteChild);
 
-  app.post('/family/chores/add', family.createChore);
+  app.post('/family/:child/chores', family.createChore);
 
-  app.post('/family/chores/edit/:id', family.editChore);
+  app.post('/family/:child/chores/edit/:chore', family.editChore);
 
-  app.get('/family/chores/delete/:id', family.deleteChore);
+  app.get('/family/:child/chores/delete/:chore', family.deleteChore);
 
 }
 

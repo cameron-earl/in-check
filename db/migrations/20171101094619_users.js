@@ -5,7 +5,7 @@ exports.up = (knex, Promise) => {
    table.string('password').notNullable();
    table.string('first_name').notNullable();
    table.boolean('is_parent').notNullable().defaultTo(false);
-   table.string('image_url');
+   table.string('image_url').defaultTo('/images/stick_figure.svg');
    table.integer('family_id')
     .notNullable()
     .references('id')

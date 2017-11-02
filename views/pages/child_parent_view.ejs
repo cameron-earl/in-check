@@ -1,181 +1,208 @@
 <%- contentFor('body') %>
 
-  <script type="text/javascript" src="/js/child-parent-view.js" defer></script>
+<script type="text/javascript" src="/js/child-parent-view.js" defer></script>
 
+<script type="text/javascript">
+  let childId = <%- child.id %>;
+</script>
 
-  <div class="center-align">
-    <h3><%= child.first_name %></h3>
-    <table class="bordered">
-      <thead>
+<div class="center-align">
+  <h3><%= child.first_name %></h3>
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th>Chore</th>
+        <th>Description</th>
+        <th>Start</th>
+        <th>Completion Date</th>
+        <th>Weekly Chores</th>
+        <th>Value</th>
+        <th>Completed</th>
+        <th>Approved</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% for(let chore of child.chores) { %>
         <tr>
-          <th>Chore</th>
-          <th>Description</th>
-          <th>Start</th>
-          <th>Completion Date</th>
-          <th>Weekly Chores</th>
-          <th>Value</th>
-          <th>Completed</th>
-          <th>Approved</th>
-          <th>Edit</th>
-          <th>Delete</th>
+          <td class="chore-title"><%= chore.title %></td>
+          <td class="chore-description"><%= chore.description %></td>
+          <td class="chore-start"><%= chore.start_date %></td>
+          <td class="chore-end"><%= chore.end_date %></td>
+          <td <%= chore.recur_weekly %></td>
+          <td class="chore-value"><%= chore.value %></td>
+          <td><%= chore.completed %></td>
+          <td><%= chore.approved %></td>
+          <td><a class="waves-effect waves-light btn-floating modal-trigger chore-edit" choreid="<%= chore.id %>" href="#edit-chore-modal"><i class="material-icons">edit</i></a></td>
+          <td><a class="waves-effect waves-light btn-floating modal-trigger chore-delete red" choreid="<%= chore.id %>" href="#delete-chore-modal"><i class="material-icons">delete_forever</i></a></td>
         </tr>
-      </thead>
-
-      <tbody>
-        <% for(let chore of child.chores){ %>
-          <tr>
-            <td class="chore-title"><%= chore.title %></td>
-            <td class="chore-description"><%= chore.description %></td>
-            <td class="chore-start"><%= chore.start_date %></td>
-            <td class="chore-end"><%= chore.end_date %></td>
-            <td <%=c hore.recur_weekly %></td>
-            <td class="chore-value"><%= chore.value %></td>
-            <td><%= chore.completed %></td>
-            <td><%= chore.approved %></td>
-            <td><a class="waves-effect waves-light btn modal-trigger chore-edit" choreid="<%= chore.id %>" href="#edit-chore-modal">Edit chore<i class="material-icons right">edit</i></a></td>
-            <td><a class="waves-effect waves-light btn modal-trigger chore-delete red" choreid="<%= chore.id %>" href="#delete-chore-modal">Delete Chore<i class="material-icons right">delete</i></a></td>
-          </tr>
-          <% } %>
-    </table>
-
-
-    <a class="waves-effect waves-light btn modal-trigger" href="#add-chore-modal">Add Chore<i class="material-icons right">add</i></a>
-    <a class="waves-effect waves-light btn modal-trigger" href="#edit-child-modal">Edit child<i class="material-icons right">edit</i></a>
-    <div class="center-align">
-      <a href="" class="btn-large waves-effect waves-light">Delete Child<i class="material-icons right">delete</i></a>
-    </div>
+      <% } %>
+  </table>
 
 
 
-    <div id="edit-chore-modal" class="modal">
-      <div class="modal-content">
-        <div class="center-align">
-          <div class="row">
-            <form class="col s12 m6 offset-m3" id="form-edit" action="" method="post">
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="edit-title" type="text" name="title" class="autocomplete validate" tabindex="1" value="">
-                  <label for="edit-title">Title</label>
-                </div>
+  <a class="waves-effect waves-light btn modal-trigger" href="#add-chore-modal">Add Chore<i class="material-icons right">add</i></a>
+  <a class="waves-effect waves-light btn modal-trigger" href="#edit-child-modal">Edit child<i class="material-icons right">edit</i></a>
+  <a class="btn waves-effect waves-light modal-trigger red" href="#delete-child-modal">Delete Child<i class="material-icons right">delete</i></a>
+
+  <p><%= JSON.stringify(children) %></p>
+
+  <div id="edit-chore-modal" class="modal">
+    <div class="modal-content">
+      <div class="center-align">
+        <div class="row">
+          <form class="col s12 m6 offset-m3" id="form-edit" action="" method="post">
+            <div class="row">
+              <div class="input-field col s12">
+                <select autofocus>
+                  <% for (let c of children) { %>
+                    <option value="<%= c.id %>" <% c.id === child.id ? "selected" : "" %><%= c.first_name %></option>
+                  <% } %>
+                </select>
+                <label>Materialize Select</label>
               </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="edit-description" name="description" type="text" tabindex="2" value="">
-                  <label for="edit-description">Description (optional)</label>
-                </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="edit-title" type="text" name="title" class="autocomplete validate" tabindex="1" value="something">
+                <label for="edit-title">Title</label>
               </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="edit-value" type="number" name="value" value="0" tabindex="3" value="">
-                  <label for="edit-value">Value</label>
-                </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="edit-description" name="description" type="text" tabindex="2" value="something">
+                <label for="edit-description">Description (optional)</label>
               </div>
-              <div class="row">
-                <div class="input-field col s12" tabindex="-1">
-                  <input id="edit-start_date" type="text" class="datepicker" name="start_date" tabindex="-1">
-                  <label for="edit-start_date">Start Date (optional)</label>
-                </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="edit-value" type="number" name="value" value="0" tabindex="3" value="something">
+                <label for="edit-value">Value</label>
               </div>
-              <div class="row">
-                <div class="input-field col s12" tabindex="-1">
-                  <input id="edit-end_date" type="text" class="datepicker" name="end_date" tabindex="-1">
-                  <label for="edit-end_date">End Date (optional)</label>
-                </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12" tabindex="-1">
+                <input id="edit-start_date" type="text" class="datepicker" name="start_date" tabindex="-1">
+                <label for="edit-start_date">Start Date (optional)</label>
               </div>
-              <input type="text" name="child_id" value="<%= child.id %>" hidden>
-              <button class="btn" type="submit" tabindex="4">Update</button>
-            </form>
-          </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12" tabindex="-1">
+                <input id="edit-end_date" type="text" class="datepicker" name="end_date" tabindex="-1">
+                <label for="edit-end_date">End Date (optional)</label>
+              </div>
+            </div>
+            <input type="text" name="child_id" value="<%= child.id %>" hidden>
+            <button class="btn" type="submit" tabindex="4">Update</button>
+          </form>
         </div>
       </div>
     </div>
-
-    <div id="add-chore-modal" class="modal">
-      <div class="modal-content">
-        <div class="center-align">
-          <div class="row">
-            <form class="col s12 m6 offset-m3" action="/family/chores/add/" method="post">
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="add-title" type="text" name="title" class="validate" tabindex="1" required>
-                  <label for="add-title">Title</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="add-description" name="description" type="text" tabindex="2">
-                  <label for="add-description">Description (optional)</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="add-value" type="number" name="value" value="0" tabindex="3">
-                  <label for="add-value">Value</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12" tabindex="-1">
-                  <input id="add-start_date" type="text" class="datepicker" name="start_date" tabindex="-1">
-                  <label for="add-start_date">Start Date (optional)</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12" tabindex="-1">
-                  <input id="add-end_date" type="text" class="datepicker" name="end_date" tabindex="-1">
-                  <label for="add-end_date">End Date (optional)</label>
-                </div>
-              </div>
-              <input type="text" name="child_id" value="<%= child.id %>" hidden>
-              <button class="btn" type="submit" tabindex="4">Add Chore</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div id="edit-child-modal" class="modal">
-      <div class="modal-content">
-        <div class="center-align">
-          <div class="row">
-            <form class="col s12 m6 offset-m3" action="/family/children/edit/<%= child.id %>" method="post">
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="first_name" type="text" name="first_name" class="validate" value="<%=child.first_name%>">
-                  <label for="username">First Name</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="username" type="text" name="username" class="validate" value="<%=child.username%>">
-                  <label for="username">Username</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="password" type="password" name="password">
-                  <label for="value">Reset Password</label>
-                </div>
-              </div>
-              <input type="text" name="child_id" value="<%= child.id %>" hidden>
-              <button class="btn" type="submit" tabindex="4">Update</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="delete-chore-modal" class="modal">
-      <div class="modal-content">
-        <div class="center-align">
-          <div class="row">
-            <h4>Are you sure?</h4>
-          </div>
-          <div class="row">
-            <a id="confirm-delete-btn" class="waves-effect waves-light btn red"><i class="material-icons right">delete_forever</i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
+
+  <div id="add-chore-modal" class="modal">
+    <div class="modal-content">
+      <div class="center-align">
+        <div class="row">
+          <form class="col s12 m6 offset-m3" action="/family/<%= child.id %>/chores" method="post">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="add-title" type="text" name="title" class="validate" tabindex="1" required autofocus>
+                <label for="add-title">Title</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="add-description" name="description" type="text" tabindex="2">
+                <label for="add-description">Description (optional)</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="add-value" type="number" name="value" value="0" tabindex="3">
+                <label for="add-value">Value</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12" tabindex="-1">
+                <input id="add-start_date" type="text" class="datepicker" name="start_date" tabindex="-1">
+                <label for="add-start_date">Start Date (optional)</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12" tabindex="-1">
+                <input id="add-end_date" type="text" class="datepicker" name="end_date" tabindex="-1">
+                <label for="add-end_date">End Date (optional)</label>
+              </div>
+            </div>
+            <input type="text" name="child_id" value="<%= child.id %>" hidden>
+            <button class="btn" type="submit" tabindex="4">Add Chore</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="edit-child-modal" class="modal">
+    <div class="modal-content">
+      <div class="center-align">
+        <div class="row">
+          <form class="col s12 m6 offset-m3" action="/family/edit/<%= child.id %>" method="post">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="first_name" type="text" name="first_name" class="validate" value="<%=child.first_name%>" autofocus>
+                <label for="first_name">First Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="username" type="text" name="username" class="validate" value="<%=child.username%>">
+                <label for="username">Username</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="password" type="password" name="password">
+                <label for="password">Reset Password</label>
+              </div>
+            </div>
+            <input type="text" name="child_id" value="<%= child.id %>" hidden>
+            <button class="btn" type="submit" tabindex="4">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="delete-chore-modal" class="modal">
+    <div class="modal-content">
+      <div class="center-align">
+        <div class="row">
+          <h4>Are you sure?</h4>
+        </div>
+        <div class="row">
+          <a id="confirm-delete-btn" class="waves-effect waves-light btn red"><i class="material-icons right">delete_forever</i></a>
+          <button class="waves-effect waves-light btn grey" onclick="$('#delete-chore-modal').modal('close');">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="delete-child-modal" class="modal">
+    <div class="modal-content">
+      <div class="center-align">
+        <div class="row">
+          <h4>Are you sure?</h4>
+        </div>
+        <div class="row">
+          <a id="confirm-delete-btn" class="waves-effect waves-light btn red" href="/family/delete/<%= child.id %>">Delete <%= child.first_name %><i class="material-icons right">delete_forever</i></a>
+          <button class="waves-effect waves-light btn grey" onclick="$('#delete-child-modal').modal('close');">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
