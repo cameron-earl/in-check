@@ -43,9 +43,15 @@ module.exports = {
                   child.chores = mixedChores.filter(chore=>chore.child_id===child.id);
                 }
                 returnObj.children = children;
-                req.session.save(err => {
-                  res.render('pages/family', returnObj);
-                });
+                knex('families')
+                  .where('id', family)
+                  .limit(1)
+                  .then(resultArr=>{
+                    returnObj.family = resultArr[0];
+                    req.session.save(err => {
+                      res.render('pages/family', returnObj);
+                    });
+                  })
               })
           })
         })
@@ -135,7 +141,7 @@ module.exports = {
       },
 
       editChild: function(req, res) {
-        let child = {};
+        let child = { id: req.params.child };
         // set child properties to only those that were sent in
         for (let key in req.body) {
           if (req.body[key].length) child[key] = req.body[key];
