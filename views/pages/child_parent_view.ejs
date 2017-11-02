@@ -27,7 +27,7 @@
               <td class="chore-description"><%= chore.description %></td>
               <td class="chore-start"><%= chore.start_date %></td>
               <td class="chore-end"><%= chore.end_date %></td>
-              <td class=""><%= chore.recur_weekly %></td>
+              <td <%= chore.recur_weekly %></td>
               <td class="chore-value"><%= chore.value %></td>
               <td><%= chore.completed %></td>
               <td><%= chore.approved %></td>
@@ -42,7 +42,7 @@
         <form class="col s12 m6 offset-m3" id="form-edit" action="" method="post">
           <div class="row">
             <div class="input-field col s12">
-              <input id="edit-title" type="text" name="title" class="validate" tabindex="1" value="">
+              <input id="edit-title" type="text" name="title" class="autocomplete" class="validate" tabindex="1" value="">
               <label for="edit-title">Title</label>
             </div>
           </div>
@@ -86,7 +86,7 @@
       <div class="center-align">
 
     <div class="row">
-      <form class="col s12 m6 offset-m3" action="/family/chores/add" method="post">
+      <form class="col s12 m6 offset-m3" action="/family/chores/add/" method="post">
         <div class="row">
           <div class="input-field col s12">
             <input id="add-title" type="text" name="title" class="validate" tabindex="1" required>
