@@ -13,6 +13,8 @@ module.exports = function(app){
 
   app.post('/login', main.login);
 
+  app.get('/logout', main.logout);
+
   app.use(childAuth)
 
   app.get('/child', child.index);

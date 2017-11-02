@@ -89,6 +89,16 @@ module.exports = {
           res.redirect('/');
         });
       });
+  },
+
+  logout: function(req, res){
+    req.session.family = null;
+    req.session.user = null;
+    req.session.auth = null;
+    req.session.save(err => {
+      res.redirect('/');
+    });
+
   }
 
 }
