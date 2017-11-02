@@ -11,23 +11,20 @@
               <th>Description</th>
               <th>Start</th>
               <th>Completion Date</th>
-              <th>Weekly Chores</th>
               <th>Value</th>
               <th>Completed</th>
-
           </tr>
         </thead>
 
         <tbody>
-          <% for(let i = 0; i <chores.length; i++){ %>
+          <% for(let chore of chores){ %>
             <tr>
-              <td><%= chores[i].title %></td>
-              <td><%= chores[i].description %></td>
-              <td><%= chores[i].start_date %></td>
-              <td><%= chores[i].end_date %></td>
-              <td><%= chores[i].recur_weekly %></td>
-              <td><%= chores[i].value %></td>
-              <td><a href="<%=chores[i].completed ? `/chore/incomplete/${chores[i].id}`: `/chore/complete/${chores[i].id}` %>"><input type="checkbox" class= "" <%= chores[i].completed ? checked = "checked": ""%> ><label></label></a></td>
+              <td><%= chore.title %></td>
+              <td><%= chore.description %></td>
+              <td><%= chore.start_date ? chore.start_date.toString().replace(/ \d{2}:.+$/,"") : "" %></td>
+              <td><%= chore.end_date ? chore.end_date.toString().replace(/ \d{2}:.+$/,"") : "" %></td>
+              <td><%= chore.value %></td>
+              <td><a href="<%=chore.completed ? `/chore/incomplete/${chore.id}`: `/chore/complete/${chore.id}` %>"><input type="checkbox" class= "" <%= chore.completed ? checked = "checked": ""%> ><label></label></a></td>
             </tr>
           <% } %>
       </table>

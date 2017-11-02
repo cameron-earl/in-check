@@ -15,7 +15,6 @@
         <th>Description</th>
         <th>Start</th>
         <th>Completion Date</th>
-        <th>Weekly Chores</th>
         <th>Value</th>
         <th>Completed</th>
         <th>Approved</th>
@@ -29,9 +28,8 @@
         <tr>
           <td class="chore-title"><%= chore.title %></td>
           <td class="chore-description"><%= chore.description %></td>
-          <td class="chore-start"><%= chore.start_date %></td>
-          <td class="chore-end"><%= chore.end_date %></td>
-          <td <%= chore.recur_weekly %></td>
+          <td class="chore-start"><%= chore.start_date.toString().replace(/ \d{2}:.+$/,"") %></td>
+          <td class="chore-end"><%= chore.end_date ? chore.end_date.toString().replace(/ \d{2}:.+$/,"") : "" %></td>
           <td class="chore-value"><%= chore.value %></td>
           <td><%= chore.completed %></td>
           <td><%= chore.approved %></td>
