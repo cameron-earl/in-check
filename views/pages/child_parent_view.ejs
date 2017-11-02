@@ -16,57 +16,58 @@
               <th>Value</th>
               <th>Completed</th>
               <th>Approved</th>
+              <th>Edit</th>
           </tr>
         </thead>
 
         <tbody>
           <% for(let chore of child.chores){ %>
             <tr>
-              <td><%= chore.title %></td>
-              <td><%= chore.description %></td>
-              <td><%= chore.start_date %></td>
-              <td><%= chore.end_date %></td>
-              <td><%= chore.recur_weekly %></td>
-              <td><%= chore.value %></td>
+              <td class="chore-title"><%= chore.title %></td>
+              <td class="chore-description"><%= chore.description %></td>
+              <td class="chore-start"><%= chore.start_date %></td>
+              <td class="chore-end"><%= chore.end_date %></td>
+              <td class=""><%= chore.recur_weekly %></td>
+              <td class="chore-value"><%= chore.value %></td>
               <td><%= chore.completed %></td>
               <td><%= chore.approved %></td>
+              <td><a class="waves-effect waves-light btn modal-trigger chore-edit" choreid="<%= chore.id %>"  href="#modal3">Edit chore<i class="material-icons right">edit</i></a></td>
             </tr>
           <% } %>
     </table>
-    <a class="waves-effect waves-light btn modal-trigger" href="#modal3">Edit chore<i class="material-icons right">edit</i></a>
     <div id="modal3" class="modal">
     <div class="modal-content">
       <div class="center-align">
       <div class="row">
-        <form class="col s12 m6 offset-m3" action="/family/children/LINKTOEDITCHORES" method="post">
+        <form class="col s12 m6 offset-m3" id="form-edit" action="" method="post">
           <div class="row">
             <div class="input-field col s12">
-              <input id="title" type="text" name="title" class="validate" tabindex="1" value="">
-              <label for="title">Title</label>
+              <input id="edit-title" type="text" name="title" class="validate" tabindex="1" value="">
+              <label for="edit-title">Title</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="description" name="description" type="text" tabindex="2" value="">
-              <label for="description">Description (optional)</label>
+              <input id="edit-description" name="description" type="text" tabindex="2" value="">
+              <label for="edit-description">Description (optional)</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="value" type="number" name="value" value="0" tabindex="3" value="">
-              <label for="value">Value</label>
+              <input id="edit-value" type="number" name="value" value="0" tabindex="3" value="">
+              <label for="edit-value">Value</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12" tabindex="-1">
-              <input id="start_date" type="text" class="datepicker" name="start_date" tabindex="-1">
-              <label for="start_date">Start Date (optional)</label>
+              <input id="edit-start_date" type="text" class="datepicker" name="start_date" tabindex="-1">
+              <label for="edit-start_date">Start Date (optional)</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12" tabindex="-1">
-              <input id="end_date" type="text" class="datepicker" name="end_date" tabindex="-1">
-              <label for="end_date">End Date (optional)</label>
+              <input id="edit-end_date" type="text" class="datepicker" name="end_date" tabindex="-1">
+              <label for="edit-end_date">End Date (optional)</label>
             </div>
           </div>
           <input type="text" name="child_id" value="<%= child.id %>" hidden>
@@ -88,32 +89,32 @@
       <form class="col s12 m6 offset-m3" action="/family/chores/add" method="post">
         <div class="row">
           <div class="input-field col s12">
-            <input id="title" type="text" name="title" class="validate" tabindex="1" required>
-            <label for="title">Title</label>
+            <input id="add-title" type="text" name="title" class="validate" tabindex="1" required>
+            <label for="add-title">Title</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="description" name="description" type="text" tabindex="2">
-            <label for="description">Description (optional)</label>
+            <input id="add-description" name="description" type="text" tabindex="2">
+            <label for="add-description">Description (optional)</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="value" type="number" name="value" value="0" tabindex="3">
-            <label for="value">Value</label>
+            <input id="add-value" type="number" name="value" value="0" tabindex="3">
+            <label for="add-value">Value</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12" tabindex="-1">
-            <input id="start_date" type="text" class="datepicker" name="start_date" tabindex="-1">
-            <label for="start_date">Start Date (optional)</label>
+            <input id="add-start_date" type="text" class="datepicker" name="start_date" tabindex="-1">
+            <label for="add-start_date">Start Date (optional)</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12" tabindex="-1">
-            <input id="end_date" type="text" class="datepicker" name="end_date" tabindex="-1">
-            <label for="end_date">End Date (optional)</label>
+            <input id="add-end_date" type="text" class="datepicker" name="end_date" tabindex="-1">
+            <label for="add-end_date">End Date (optional)</label>
           </div>
         </div>
         <input type="text" name="child_id" value="<%= child.id %>" hidden>
