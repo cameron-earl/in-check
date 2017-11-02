@@ -19,9 +19,9 @@ module.exports = function(app){
 
   app.get('/child', child.index);
 
-  app.get('/chore/incomplete/:chore', child.incomplete);
+  app.get('/chores/uncomplete/:chore', child.uncomplete);
 
-  app.get('/chore/complete/:chore', child.complete);
+  app.get('/chores/complete/:chore', child.complete);
 
   app.use(parentAuth);
 
@@ -40,6 +40,14 @@ module.exports = function(app){
   app.post('/family/:child/chores/edit/:chore', family.editChore);
 
   app.get('/family/:child/chores/delete/:chore', family.deleteChore);
+
+  app.get('/family/:child/chores/uncomplete/:chore', family.uncompleteChore);
+
+  app.get('/family/:child/chores/complete/:chore', family.completeChore);
+
+  app.get('/family/:child/chores/unapprove/:chore', family.unapproveChore);
+
+  app.get('/family/:child/chores/approve/:chore', family.approveChore);
 
 }
 

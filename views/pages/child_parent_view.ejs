@@ -23,7 +23,7 @@
         <th>Deadline</th>
         <th>Value</th>
         <th>Completed</th>
-        <th>Approve</th>
+        <th>Approved</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
@@ -38,8 +38,8 @@
           <td class="chore-start"><%= chore.start_date.toString().replace(/ \d{2}:.+$/,"") %></td>
           <td class="chore-end"><%= chore.end_date ? chore.end_date.toString().replace(/ \d{2}:.+$/,"") : "" %></td>
           <td class="chore-value"><%= chore.value %></td>
-          <td><%= chore.completed %></td>
-          <td><%= chore.approved %></td>
+          <td><a href="<%=chore.completed ? `/family/${child.id}/chore/incomplete/${chore.id}`: `/family/${child.id}/chore/complete/${chore.id}` %>"><input type="checkbox" <%= chore.completed ? checked = "checked": ""%> ><label></label></a></td>
+          <td><a href="<%=chore.approved ? `/family/${child.id}/chore/unapprove/${chore.id}`: `/family/${child.id}/chore/approve/${chore.id}` %>"><input type="checkbox" <%= chore.approved ? checked="checked": ""%> ><label></label></a></td>
           <td><a class="waves-effect waves-light btn-floating modal-trigger chore-edit" choreid="<%= chore.id %>" href="#edit-chore-modal"><i class="material-icons">edit</i></a></td>
           <td><a class="waves-effect waves-light btn-floating modal-trigger chore-delete red" choreid="<%= chore.id %>" href="#delete-chore-modal"><i class="material-icons">delete_forever</i></a></td>
         </tr>
