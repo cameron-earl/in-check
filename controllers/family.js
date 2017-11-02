@@ -13,11 +13,13 @@ module.exports = {
       knex('users')
         .where('family_id', family)
         .andWhere('is_parent', false)
+        .orderBy('created_at')
         .then((children)=>{
           //get chores for children
           let childIds = children.map(c=>c.id);
           knex('chores')
           .whereIn('child_id', childIds)
+          .orderBy('created_at')
           .then((mixedChores)=>{
             //get completed status of all chores
             //get approval status of all chores
@@ -28,6 +30,7 @@ module.exports = {
             let choreIds = mixedChores.map(c=>c.id);
             knex('completed_chores')
               .whereIn('chore_id', choreIds)
+              .orderBy('created_at')
               .then((mixedCompletedChores)=>{
                 for (let completedChore of mixedCompletedChores) {
                   let thisChore = mixedChores.find(c=>c.id===completedChore.chore_id);
@@ -79,20 +82,23 @@ module.exports = {
     },
 
     viewChild: function(req, res){
-      let childID = req.params.id;
+      let childId = req.params.child;
       let returnObj = {
         message: req.session.message
       };
       req.session.message = null;
       let family = req.session.family;
       knex('users')
-        .where('id', childID)
-        .limit(1)
-        .then((resultArr)=>{
-          let child = resultArr[0];
+        .where('is_parent', false)
+        .andWhere('family_id', family)
+        .orderBy('created_at')
+        .then((children)=>{
+          returnObj.children = children;
+          let child = children.find(c => c.id == childId);
           knex('chores')
-          .where('child_id', child.id)
-          .then((chores)=>{
+            .where('child_id', childId)
+            .orderBy('created_at')
+            .then((chores)=>{
             //get completed status of all chores
             //get approval status of all chores
             for (let chore of chores) {
@@ -102,18 +108,15 @@ module.exports = {
             let choreIds = chores.map(c=>c.id);
             knex('completed_chores')
               .whereIn('chore_id', choreIds)
+              .orderBy('created_at')
               .then((completedChores)=>{
                 for (let completedChore of completedChores) {
-                  let thisChore = chores.find(c=>c.id===completedChore.chore_id);
+                  let thisChore = chores.find(c => c.id === completedChore.chore_id);
                   thisChore.completed = true;
                   thisChore.approved = completedChore.approved;
                 }
-
                 //add chores for each child to child object
                 child.chores = chores;
-                for (let chore of child.chores) {
-                  console.log(JSON.stringify());
-                }
                 returnObj.child = child;
                 req.session.save(err => {
                   res.render('pages/child_parent_view', returnObj);
@@ -131,14 +134,53 @@ module.exports = {
         });
       },
 
-      editChildPage: function(req, res) {},
+      editChild: function(req, res) {
+        let child = {};
+        // set child properties to only those that were sent in
+        for (let key in req.body) {
+          if (req.body[key].length) child[key] = req.body[key];
+        }
+        knex('users')
+          .update(child)
+          .where('id',child.id)
+          .limit(1)
+          .then(()=>{
+            req.session.save(err=>{
+              res.redirect('/family/' + child.id);
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            req.session.message = "Our website had an error. Please try again.";
+            req.session.save(err=>{
+              res.redirect('/family/'+child.id);
+            });
+          });
+      },
 
-      editChild: function(req, res) {},
-
-      deleteChild: function(req, res) {},
+      deleteChild: function(req, res) {
+        let childId = req.params.child;
+        console.log('bark!')
+        knex('users')
+          .del()
+          .where('id', childId)
+          .limit(1)
+          .then(()=>{
+            req.session.save(err=>{
+              res.redirect('/family');
+            });
+          })
+          .catch((err)=>{
+            console.log(err);
+            req.session.message = "Error: Could not delete child. Please try again.";
+            req.session.save(err=>{
+              res.redirect('/family/' + childId);
+            });
+          });
+      },
 
       createChore: function(req, res) {
-        let childId = req.body.child_id;
+        let childId = req.params.child;
         console.log(JSON.stringify(req.body, null, 2));
         let insertObj = {
           title: req.body.title,
@@ -154,20 +196,64 @@ module.exports = {
           .insert(insertObj, '*')
           .then((result)=>{
             req.session.save(err=>{
-              res.redirect('/family/children/' + childId );
+              res.redirect('/family/' + childId);
             });
           })
           .catch((err) => {
             console.log(err);
             req.session.message = "Error adding chore. Please try again."
             req.session.save(err=>{
-              let path = '/family' + (childId ? `/children/${childId}` : '');
-              res.redirect(path);
+              res.redirect('/family/' + childId);
             });
           });
       },
 
-      editChore: function(req, res) {},
+      editChore: function(req, res) {
+        let childId = req.params.child;
+        let choreId = req.params.chore;
+        let chore = {
+          title: req.body.title,
+          value: req.body.value,
+          child_id: req.body.child_id
+        };
+        if (req.body.description) chore.description = req.body.description;
+        if (req.body.start_date) chore.start_date = req.body.start_date;
+        if (req.body.end_date) chore.end_date = req.body.end_date;
+        knex('chores')
+          .update(chore)
+          .where('id', choreId)
+          .limit(1)
+          .then((result)=>{
+            req.session.save(err=>{
+              res.redirect('/family/' + childId);
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            req.session.message = "Error updating chore. Please try again."
+            req.session.save(err=>{
+              res.redirect('/family/' + childId);
+            });
+          });
+      },
 
-      deleteChore: function(req, res) {}
+      deleteChore: function(req, res) {
+        let childId = req.params.child;
+        knex('chores')
+          .del()
+          .where('id',req.params.chore)
+          .limit(1)
+          .then(()=>{
+            req.session.save(err=>{
+              res.redirect('/family/' + childId );
+            });
+          })
+          .catch((err)=>{
+            console.log(err);
+            req.session.message = "Error deleting chore. Please try again.";
+            req.session.save(err=>{
+              res.redirect('/family/' + childId);
+            });
+          });
+      }
 }

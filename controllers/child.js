@@ -58,7 +58,7 @@ module.exports = {
        knex('completed_chores')
        .del()
        .where(
-         "chore_id", req.params.id
+         "chore_id", req.params.chore
        )
        .limit(1)
        .then(()=>{
@@ -77,7 +77,7 @@ module.exports = {
      complete: function(req, res){
        knex('completed_chores')
        .insert({
-        chore_id: req.params.id
+        chore_id: req.params.chore
        })
        .then(()=>{
          res.redirect('/child');
