@@ -1,5 +1,9 @@
 <%- contentFor('body') %>
 
+<% if (message) { %>
+  <% include ../partials/error.ejs %>
+<% } %>
+
 <script type="text/javascript" src="/js/child-parent-view.js" defer></script>
 
 <script type="text/javascript">
