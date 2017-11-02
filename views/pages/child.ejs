@@ -27,7 +27,7 @@
               <td><%= chore.start_date ? chore.start_date.toString().replace(/ \d{2}:.+$/,"") : "" %></td>
               <td><%= chore.end_date ? chore.end_date.toString().replace(/ \d{2}:.+$/,"") : "" %></td>
               <td><%= chore.value %></td>
-              <td><a href="<%=chore.completed ? `/chore/incomplete/${chore.id}`: `/chore/complete/${chore.id}` %>"><input type="checkbox" class= "" <%= chore.completed ? checked = "checked": ""%> ><label></label></a></td>
+              <td><a href="<%=chore.completed ? `/chores/uncomplete/${chore.id}`: `/chores/complete/${chore.id}` %>"><input type="checkbox" class= "" <%= chore.completed ? checked = "checked": ""%> ><label></label></a></td>
             </tr>
           <% } %>
       </table>
