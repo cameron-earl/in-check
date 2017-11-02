@@ -14,14 +14,24 @@ $(document).ready(() => {
     let choreTitle = row.find('.chore-title').text();
     let choreDescription = row.find('.chore-description').text();
     let choreValue = row.find('.chore-value').text();
-    console.log(choreTitle);
 
     $('#form-edit').attr('action', '/family/chores/edit/' + choreId);
     $('#edit-title').attr('value', choreTitle)
     $('#edit-description').attr('value', choreDescription)
     $('#edit-value').attr('value', choreValue)
 
-  })
+  });
+
+  $('.chore-delete').click(function(ev) {
+    let choreId = $(ev.target).attr('choreid');
+    let row = $(ev.target).parent().parent();
+    let choreTitle = row.find('.chore-title').text();
+    let confirmDeleteBtn = $('#confirm-delete-btn');
+
+    confirmDeleteBtn.text(`Delete "${choreTitle}"`);
+    confirmDeleteBtn.attr('href','/family/chores/delete/' + choreId);
+  });
+
   $('input.autocomplete').autocomplete({
     data: {
       "Dust surfaces": '/images/icons/duster.svg',
