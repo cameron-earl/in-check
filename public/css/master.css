@@ -28,12 +28,9 @@ i.icon-red {
     color: red;
 }
 
-/*.nav-wrapper > .brand-logo > i{
-  transform: scale(2);
-}*/
-
 .nav-wrapper{
   padding-left: 5vw;
+  padding-right: 5vw;
 }
 
 
