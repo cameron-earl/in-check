@@ -54,7 +54,7 @@ $(document).ready(() => {
 
   $('.chore-delete').click(prepareChoreDeleteForm);
 
-  $('.nav-wrapper > ul').prepend('<li><a href="/family" class="waves-effect waves-light btn">Back</a></li>');
+  $('.nav-wrapper > ul').prepend('<li><a href="/family" class="black-text">BACK</a></li>');
 });
 
 function prepareChoreEditForm(ev) {
