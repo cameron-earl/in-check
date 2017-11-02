@@ -54,7 +54,7 @@ module.exports = {
        });
      },
 
-     incomplete: function(req, res){
+     uncomplete: function(req, res){
        knex('completed_chores')
        .del()
        .where(
@@ -66,7 +66,7 @@ module.exports = {
        })
        .catch((err) => {
          console.log(err);
-         req.session.message = "ERROR"
+         req.session.message = "Error marking chore as incomplete."
          req.session.save(err=>{
            res.redirect('/child');
          });
@@ -84,12 +84,11 @@ module.exports = {
        })
        .catch((err) => {
          console.log(err);
-         req.session.message = "ERROR"
+         req.session.message = "Error marking chore as complete."
          req.session.save(err=>{
            res.redirect('/child');
          });
        });
      }
-
 
 }
