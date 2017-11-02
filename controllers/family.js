@@ -143,25 +143,27 @@ module.exports = {
       editChild: function(req, res) {
         let child = { id: req.params.child };
         // set child properties to only those that were sent in
-        for (let key in req.body) {
-          if (req.body[key].length) child[key] = req.body[key];
-        }
-        knex('users')
-          .update(child)
-          .where('id',child.id)
-          .limit(1)
-          .then(()=>{
-            req.session.save(err=>{
-              res.redirect('/family/' + child.id);
-            });
-          })
-          .catch((err) => {
-            console.log(err);
-            req.session.message = "Our website had an error. Please try again.";
-            req.session.save(err=>{
-              res.redirect('/family/'+child.id);
-            });
+        if (req.body.first_name.length) child.first_name = req.body.first_name;
+        if (req.body.username.length) child.username = req.body.username;
+        if (req.body.password.length) child.password = req.body.password;
+        encryption.hash(req.body).then(encryptedUser=>{
+          knex('users')
+            .update(encryptedUser)
+            .where('id',child.id)
+            .limit(1)
+            .then(()=>{
+              req.session.save(err=>{
+                res.redirect('/family/' + child.id);
+              });
+            })
+        })
+        .catch((err) => {
+          console.log(err);
+          req.session.message = "Error editing information. Please try again.";
+          req.session.save(err=>{
+            res.redirect('/family/'+child.id);
           });
+        });
       },
 
       deleteChild: function(req, res) {
