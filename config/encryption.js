@@ -7,7 +7,10 @@ module.exports = {
     return new Promise((resolve, reject)=>{
       bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
           if (err) reject(err);
-
+          if (!user.password) {
+            delete user.password;
+            resolve(user);
+          }
           // hash the password using our new salt
           bcrypt.hash(user.password, salt, function(err, hash) {
               if (err) reject(err);

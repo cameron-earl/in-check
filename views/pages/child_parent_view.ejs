@@ -12,6 +12,7 @@
 
 <div class="center-align">
   <h3><%= child.first_name %></h3>
+    
   <table class="bordered">
     <thead>
       <tr>
@@ -109,13 +110,13 @@
           <form class="col s12 m6 offset-m3" action="/family/<%= child.id %>/chores" method="post">
             <div class="row">
               <div class="input-field col s12">
-                <input id="add-title" type="text" name="title" class="autocomplete validate" tabindex="1" required autofocus>
+                <input id="add-title" type="text" data-length="255" name="title" class="autocomplete validate" tabindex="1" required autofocus>
                 <label for="add-title">Title</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <input id="add-description" name="description" type="text" tabindex="2">
+                <input id="add-description" name="description" type="text" data-length="255" tabindex="2">
                 <label for="add-description">Description (optional)</label>
               </div>
             </div>
@@ -169,7 +170,7 @@
                 <label for="password">Reset Password</label>
               </div>
             </div>
-            <input type="text" name="child_id" value="<%= child.id %>" hidden>
+            <input type="text" name="id" value="<%= child.id %>" hidden>
             <button class="btn" type="submit" tabindex="4">Update</button>
           </form>
         </div>
