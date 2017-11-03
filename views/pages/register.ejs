@@ -1,12 +1,12 @@
 <%- contentFor('body') %>
 
-<% if (message) { %>
-  <% include ../partials/error.ejs %>
-<% } %>
 
 <script type="text/javascript" src="/js/register.js" defer></script>
 
 <div class="content-box">
+<% if (message) { %>
+  <% include ../partials/error.ejs %>
+  <% } %>
   <div class="row">
     <form class="col s12" action="/register" method="POST">
       <div class="center-align">

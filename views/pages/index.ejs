@@ -1,19 +1,19 @@
 <%- contentFor('body') %>
 
-<% if (message) { %>
-  <% include ../partials/error.ejs %>
-<% } %>
 <script type="text/javascript" src="/js/index.js" defer></script>
 
 <div class="content-box">
 
+<% if (message) { %>
+  <% include ../partials/error.ejs %>
+  <% } %>
   <div class="center-align log">
     <h1 class="chorelist">Log In</h1>
   </div>
 
   <div class="row">
 
-    <form class="col s12 m6 offset-m3" action="/login" method="post">
+    <form class="col s12" action="/login" method="post">
       <div class="row">
         <div class="input-field col s12">
           <input autofocus id="username" name="username" type="text" class="validate">

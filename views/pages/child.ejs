@@ -1,12 +1,12 @@
 <%- contentFor('body') %>
 
-<% if (message) { %>
-  <% include ../partials/error.ejs %>
-<% } %>
 
 <script type="text/javascript" src="/js/child.js" defer></script>
 
-<div class= "content-box">
+<div id="kid-chores" class= "content-box">
+<% if (message) { %>
+  <% include ../partials/error.ejs %>
+<% } %>
   <h1 style="margin-top: 1%;"><%= child.first_name %>'s Chores </h1>
 
   <table class="bordered responsive-table centered">
@@ -36,8 +36,6 @@
           <% } %>
       </table>
 </div>
-
-<br>
 
 
 <% if (chores.filter(c=>c.approved).length) { %>

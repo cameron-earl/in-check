@@ -1,13 +1,17 @@
 <%- contentFor('body') %>
-
-  <% if (message) { %>
-    <% include ../partials/error.ejs %>
-      <% } %>
-        <div class="center-align">
-          <h1 class="chorelist"><%= family.name %> Family Chores List</h1>
-        </div>
-
         <script type="text/javascript" src="/js/family.js" defer></script>
+
+<div class="content-box">
+
+
+<% if (message) { %>
+  <% include ../partials/error.ejs %>
+<% } %>
+<div class="center-align">
+  <h1 class="chorelist"><%= family.name %> Family Chores List</h1>
+</div>
+
+
 
 <div class="row">
 <% for(let child of children){ %>
@@ -32,6 +36,7 @@
 
         <div class="center-align">
           <button class="waves-effect waves-light btn modal-trigger light-green" href="#add-child-modal" type="submit" name="action">Add Children<i class="material-icons right">person_add</i></button>
+        </div>
         </div>
 
         <div id="add-child-modal" class="modal">

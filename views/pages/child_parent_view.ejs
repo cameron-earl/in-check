@@ -1,8 +1,5 @@
 <%- contentFor('body') %>
 
-<% if (message) { %>
-  <% include ../partials/error.ejs %>
-<% } %>
 
 <script type="text/javascript" src="/js/child-parent-view.js" defer></script>
 
@@ -11,6 +8,9 @@
 </script>
 
 <div class="center-align content-box">
+<% if (message) { %>
+  <% include ../partials/error.ejs %>
+  <% } %>
   <h1 style="margin-top: 1%;" class="chorelist"><%= child.first_name %></h1>
 
   <table class="bordered centered">
@@ -63,16 +63,7 @@
     <div class="center-align">
       <div class="row">
         <form class="col s12 m6 offset-m3" id="form-edit" action="" method="post">
-          <div class="row black-text">
-            <div class="input-field col s12 black-text">
-              <select autofocus class="black-text">
-                <% for (let c of children) { %>
-                  <option class="black-text" value="<%= c.id %>" <% c.id === child.id ? "selected" : "" %><%= c.first_name %></option>
-                  <% } %>
-                </select>
-                <label>Change Assigned Child</label>
-              </div>
-            </div>
+
             <div class="row">
               <div class="input-field col s12">
                 <input id="edit-title" type="text" name="title" class="autocomplete validate" tabindex="1" value="something">
