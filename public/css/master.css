@@ -51,6 +51,7 @@ td > img
 {
     width: 25px;
     margin-right: 5px;
+    margin-bottom: -10px;
 
     -webkit-transform: scale(2);
             transform: scale(2);
@@ -77,9 +78,9 @@ hr
     margin-bottom: 5px !important;
 }
 
-#username
+label
 {
-    font-size: 20px !important;
+    font-size: 1.2em !important;
 }
 
 .btn
@@ -105,7 +106,10 @@ hr
 
 .content-box
 {
-    margin: 0 !important;
+    display: inline-block;
+
+    min-width: 50%;
+    margin: 0 auto !important;
     padding: 20px;
 
     opacity: .8;
@@ -121,4 +125,9 @@ hr
 td
 {
     /*max-width: 100px;*/
+}
+
+#kid-chores
+{
+    margin-bottom: 20px !important;
 }

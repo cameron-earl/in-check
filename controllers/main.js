@@ -34,15 +34,18 @@ module.exports = {
                 password: encryptedUser.password,
                 family_id: result[0].id,
                 is_parent: true,
-                first_name: "Parent's first name" //TODO get from form
+                first_name: "parents don't get names"
               })
               .then(() => {
-                res.redirect('/');
+                req.session.message = "Welcome! Please login.";
+                req.session.save(err => {
+                  res.redirect('/');
+                })
               })
           })
       })
       .catch(err => {
-        req.session.message = "Error in registration, Try again!!!.";
+        req.session.message = "Error in registration, Try again!!!";
         req.session.save(err => {
           res.redirect('/');
         })
