@@ -16,7 +16,7 @@ exports.seed = function(knex, Promise) {
         {title: 'Wash Dishes', description: 'Do not wash the big pans. I will take care of that. ', start_date: 'Mon Nov 3 2017', end_date: 'Mon Nov 4 2017', recur_weekly: 'false', value: 2.00, child_id: 5},
         {title: 'Clean Mirrors', description: 'The bathroom mirrors have hand prints.', start_date: 'Mon Nov 4 2017', end_date: 'Mon Nov 5 2017', recur_weekly: 'false', value: 2.00, child_id: 5},
         {title: 'Homework', description: 'Do not forget about your upcoming finals!', start_date: 'Mon Nov 4 2017', end_date: 'Mon Nov 11 2017', recur_weekly: 'false', value: 0, child_id: 5},
-        {title: 'Shower pet', description: 'The dog ran out lastnight and played in the mud!', start_date: 'Mon Nov 4 2017', end_date: 'Mon Nov 4 2017', recur_weekly: 'false', value: 3.00, child_id: 5},
+        {title: 'Shower Pet', description: 'The dog ran out lastnight and played in the mud!', start_date: 'Mon Nov 4 2017', end_date: 'Mon Nov 4 2017', recur_weekly: 'false', value: 3.00, child_id: 5},
         {title: 'Put Things in Place', description: 'Your toys are all over the place.', start_date: 'Mon Nov 3 2017' , end_date: 'Mon Nov 4 2017', recur_weekly: 'false', value: 1.00, child_id: 6},
         {title: 'Homework', description: 'Study for vocab test tomorrow!', start_date: 'Mon Nov 3 2017' , end_date: 'Mon Nov 3 2017', recur_weekly: 'false', value: 0, child_id: 6},
         {title: 'Organize Closet', description: 'Put your shoes back in their boxes.', start_date: 'Mon Nov 3 2017' , end_date: 'Mon Nov 7 2017', recur_weekly: 'false', value: 1.00, child_id: 6},
