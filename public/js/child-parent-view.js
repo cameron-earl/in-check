@@ -1,4 +1,5 @@
 const choreIcons = {
+  "Shovel Snow": '/images/icons/shovel.svg',
   "Dust Surfaces": '/images/icons/duster.svg',
   "Sweep": '/images/icons/sweeper.svg',
   "Vacuum": '/images/icons/vacuum.svg',
