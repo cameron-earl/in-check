@@ -11,8 +11,8 @@ body
     min-height: 100vh;
     margin: 0;
 
-    background-image: url('/images/gradient_squares.png');
-    background-repeat: repeat;
+    background-image: url('/images/homes.jpg');
+    background-size:cover;
 }
 
 main
@@ -58,4 +58,26 @@ h4,
 .brand-logo
 {
     font-family: 'Shadows Into Light', cursive;
+}
+
+
+.log {
+  margin-top: 9% !important;
+}
+
+hr {
+  width: 60px;
+  text-align: center;
+}
+
+.row {
+  margin-bottom: 5px !important;
+}
+
+#username {
+  font-size: 20px !important;
+}
+
+.btn {
+  border-radius: 5px;
 }
