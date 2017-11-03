@@ -1,0 +1,23 @@
+One Family
+#1 PARENT
+Username: nicolesmith
+Password: smithfamily
+CHILDREN
+#1 CHILD
+Username: maggiesmith
+Password: smithfamily
+#2 CHILD
+Username: ryansmith
+Password: smithfamily
+
+Second family
+#2 PARENT
+Username: alexmills
+Password: millsfamily
+CHILDREN
+#1 CHILD
+Username: allisonmills
+Password: millsfamily
+#2 CHILD
+Username: jakemills
+Password: millsfamily

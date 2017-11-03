@@ -11,7 +11,7 @@
 
 <div class="row">
 <% for(let child of children){ %>
-  <div class="col s6 m4 l3">
+  <div class="col s12 m6 l4">
     <div class="card medium">
       <a href="/family/<%= child.id %>">
       <div class="card-image" style="min-height: 240px">
@@ -41,6 +41,12 @@
       <div class="input-field col s12">
         <input id="first_name" type="text" name="first_name" class="validate" required>
         <label for="first_name">First Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="image_url" type="text" name="image_url" class="validate" pattern=".*\.(png|gif|jpg|jpeg|svg|tiff|PNG|GIF|JPG|JPEG|SVG|TIFF)">
+        <label for="image_url">Link to Profile Photo</label>
       </div>
     </div>
     <div class="row">
