@@ -23,6 +23,7 @@
 
         <tbody>
           <% for(let chore of chores){ %>
+              <% if(chore.approved === false){ %>
             <tr>
               <td class="chore-icon"></td>
               <td class="chore-title"><%= chore.title %></td>
@@ -32,6 +33,7 @@
               <td><a href="<%=chore.completed ? `/chores/uncomplete/${chore.id}`: `/chores/complete/${chore.id}` %>"><input type="checkbox" class= "" <%= chore.completed ? checked = "checked": ""%> ><label></label></a></td>
             </tr>
           <% } %>
+          <% } %>
       </table>
 </div>
 
@@ -40,6 +42,7 @@
   <table class="bordered">
     <thead>
       <tr>
+          <th style="opacity: 0;">___</th>
           <th>Chore</th>
           <th>Approved</th>
       </tr>
@@ -48,7 +51,8 @@
       <% for(let i = 0; i <chores.length; i++){ %>
         <% if(chores[i].approved === true){ %>
         <tr>
-          <td><%= chores[i].title %></td>
+          <td class="chore-icon"></td>
+          <td class=""><%= chores[i].title %></td>
           <td><%= chores[i].approved %></td>
         </tr>
       <% } %>

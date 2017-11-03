@@ -33,7 +33,6 @@ const choreIcons = {
 
 $(document).ready(() => {
   addChoreIcons();
-  console.log('bark!');
 });
 
 function addChoreIcons() {

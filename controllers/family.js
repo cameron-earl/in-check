@@ -72,7 +72,8 @@ module.exports = {
           first_name: encryptedUser.first_name,
           username: encryptedUser.username,
           password: encryptedUser.password,
-          family_id: req.session.family
+          family_id: req.session.family,
+          image_url: encryptedUser.image_url
         })
         .then(()=>{
           res.redirect('/family')
