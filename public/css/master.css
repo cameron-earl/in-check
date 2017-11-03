@@ -12,7 +12,7 @@ body
     margin: 0;
 
     background-image: url('/images/homes.jpg');
-    background-size:cover;
+    background-size: cover;
 }
 
 main
@@ -20,6 +20,8 @@ main
     -webkit-box-flex: 1;
     -ms-flex: 1 0 auto;
         flex: 1 0 auto;
+
+    padding-bottom: 20px;
 }
 
 footer.page-footer
@@ -61,23 +63,29 @@ h4,
 }
 
 
-.log {
-  margin-top: 9% !important;
+.log
+{
+    margin-top: 9% !important;
 }
 
-hr {
-  width: 60px;
-  text-align: center;
+hr
+{
+    width: 60px;
+
+    text-align: center;
 }
 
-.row {
-  margin-bottom: 5px !important;
+.row
+{
+    margin-bottom: 5px !important;
 }
 
-#username {
-  font-size: 20px !important;
+#username
+{
+    font-size: 20px !important;
 }
 
-.btn {
-  border-radius: 5px;
+.btn
+{
+    border-radius: 5px;
 }
