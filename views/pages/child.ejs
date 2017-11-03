@@ -4,12 +4,15 @@
   <% include ../partials/error.ejs %>
 <% } %>
 
+<script type="text/javascript" src="/js/child.js" defer></script>
+
 <div class= "container">
   <h1><%= child.first_name %>: Chores</h1>
 
   <table class="bordered">
         <thead>
           <tr>
+              <th style="opacity: 0;">___</th>
               <th>Chore</th>
               <th>Description</th>
               <th>Start</th>
@@ -22,7 +25,8 @@
         <tbody>
           <% for(let chore of chores){ %>
             <tr>
-              <td><%= chore.title %></td>
+              <td class="chore-icon"></td>
+              <td class="chore-title"><%= chore.title %></td>
               <td><%= chore.description %></td>
               <td><%= chore.start_date ? chore.start_date.toString().replace(/ \d{2}:.+$/,"") : "" %></td>
               <td><%= chore.end_date ? chore.end_date.toString().replace(/ \d{2}:.+$/,"") : "" %></td>
