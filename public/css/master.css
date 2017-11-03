@@ -21,7 +21,7 @@ main
     -ms-flex: 1 0 auto;
         flex: 1 0 auto;
 
-    padding-bottom: 20px;
+    padding: 20px 0;
 }
 
 footer.page-footer
@@ -62,12 +62,6 @@ h4,
     font-family: 'Shadows Into Light', cursive;
 }
 
-
-.log
-{
-    margin-top: 9% !important;
-}
-
 hr
 {
     width: 60px;
@@ -88,4 +82,14 @@ hr
 .btn
 {
     border-radius: 5px;
+}
+
+.content-box
+{
+    margin: 0;
+    padding: 20px;
+
+    opacity: .8;
+    border-radius: 10px;
+    background-color: ghostwhite;
 }
