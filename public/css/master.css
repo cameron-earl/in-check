@@ -10,6 +10,8 @@ body
 
     min-height: 100vh;
     margin: 0;
+    background-image: url('/images/gradient_squares.png');
+    background-repeat: repeat;
 }
 
 main
