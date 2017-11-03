@@ -66,15 +66,18 @@ module.exports = {
   },
 
   createChild: function(req, res){
-    encryption.hash(req.body).then(encryptedUser=>{
+    let newChild = {
+      first_name: req.body.first_name,
+      username: req.body.username,
+      password: req.body.password,
+      family_id: req.session.family
+    }
+
+    if (req.body.image_url.length) newChild.image_url = req.body.image_url;
+
+    encryption.hash(newChild).then(encryptedUser=>{
       knex('users')
-        .insert({
-          first_name: encryptedUser.first_name,
-          username: encryptedUser.username,
-          password: encryptedUser.password,
-          family_id: req.session.family,
-          image_url: encryptedUser.image_url
-        })
+        .insert(encryptedUser)
         .then(()=>{
           res.redirect('/family')
         })

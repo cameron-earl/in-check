@@ -44,6 +44,13 @@
                     <label for="first_name">First Name</label>
                   </div>
                 </div>
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="image_url" type="text" name="image_url" class="validate" pattern=".*\.(png|gif|jpg|jpeg|svg|tiff|PNG|GIF|JPG|JPEG|SVG|TIFF)">
+                    <label for="image_url">Link to Profile Photo</label>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="input-field col s12">
                     <input id="username" name="username" type="text" class="validate" required>
@@ -54,6 +61,12 @@
                   <div class="input-field col s12">
                     <input id="password" type="password" name="password" class="validate" required>
                     <label for="password">Password</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="password2" type="password" onchange="check(this)" class="validate" required>
+                    <label for="password2">Confirm Password</label>
                   </div>
                 </div>
                 <div class="row">
