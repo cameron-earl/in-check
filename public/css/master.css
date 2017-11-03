@@ -47,3 +47,8 @@ td > img
     -webkit-transform: scale(2);
             transform: scale(2);
 }
+
+.chorelist{
+  font-family: 'Shadows Into Light', cursive;
+
+}
