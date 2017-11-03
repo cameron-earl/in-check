@@ -24,17 +24,26 @@ footer.page-footer
     padding-top: 0;
 }
 
-i.icon-red {
+i.icon-red
+{
     color: red;
 }
 
-.nav-wrapper{
-  padding-left: 5vw;
-  padding-right: 5vw;
+.nav-wrapper
+{
+    padding-right: 5vw;
+    padding-left: 5vw;
 }
 
 
-.nav-wrapper > .brand-logo > img {
-  width: 30px;
-  height: 30px;
+.nav-wrapper > .brand-logo > img
+{
+    width: 30px;
+    height: 30px;
+}
+
+td > img
+{
+    -webkit-transform: scale(2);
+            transform: scale(2);
 }
