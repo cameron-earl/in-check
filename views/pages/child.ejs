@@ -6,10 +6,10 @@
 
 <script type="text/javascript" src="/js/child.js" defer></script>
 
-<div class= "container" style="border: solid 3px; border-radius: 4%; opacity: 0.8; background-color: ghostwhite; margin-top: 2%; border-color: ghostwhite;">
+<div class= "content-box">
   <h1 style="margin-top: 1%;"><%= child.first_name %>'s Chores </h1>
 
-  <table class="bordered">
+  <table class="bordered responsive-table centered">
         <thead>
           <tr>
               <th style="opacity: 0;">___</th>
@@ -27,24 +27,28 @@
             <tr>
               <td class="chore-icon"></td>
               <td class="chore-title"><%= chore.title %></td>
-              <td><%= chore.description %></td>
-              <td><%= chore.end_date ? chore.end_date.toString().replace(/ \d{2}:.+$/,"") : "" %></td>
-              <td><%= chore.value %></td>
-              <td><a href="<%=chore.completed ? `/chores/uncomplete/${chore.id}`: `/chores/complete/${chore.id}` %>"><input type="checkbox" class= "" <%= chore.completed ? checked = "checked": ""%> ><label></label></a></td>
+              <td class="chore-description"><%= chore.description %></td>
+              <td class="chore-end"><%= chore.end_date ? chore.end_date.toString().replace(/ \d{2}:.+$/,"") : "" %></td>
+              <td class="chore-value"><%= +chore.value %></td>
+              <td class="chore-completed"><a href="<%=chore.completed ? `/chores/uncomplete/${chore.id}`: `/chores/complete/${chore.id}` %>"><input type="checkbox" class= "" <%= chore.completed ? checked = "checked": ""%> ><label></label></a></td>
             </tr>
           <% } %>
           <% } %>
       </table>
 </div>
 
-<div class="container" style="border: solid 3px; border-radius: 4%; opacity: 0.8; background-color: ghostwhite; margin-top: 2%; margin-bottom:2%; border-color: ghostwhite;">
-  <h2 style="margin-top: 1%;">Completed Chores</h2>
-  <table class="bordered">
+<br>
+
+
+<% if (chores.filter(c=>c.approved).length) { %>
+<div class="content-box">
+  <h4>Total Earnings: <%= totalPendingEarnings %></h4>
+  <table class="bordered responsive-table centered">
     <thead>
       <tr>
           <th style="opacity: 0;">___</th>
           <th>Chore</th>
-          <th>Approved</th>
+          <th>Value</th>
       </tr>
     </thead>
     <tbody>
@@ -52,11 +56,12 @@
         <% if(chores[i].approved === true){ %>
         <tr>
           <td class="chore-icon"></td>
-          <td class=""><%= chores[i].title %></td>
-          <td><%= chores[i].approved %></td>
+          <td class="chore-title"><%= chores[i].title %></td>
+          <td><%= +chores[i].value %></td>
         </tr>
       <% } %>
       <% } %>
     <tbody>
   </table>
 </div>
+<% } %>

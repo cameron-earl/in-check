@@ -13,7 +13,7 @@
 <div class="center-align content-box">
   <h1 style="margin-top: 1%;" class="chorelist"><%= child.first_name %></h1>
 
-  <table class="bordered">
+  <table class="bordered centered">
     <thead>
       <tr>
         <th style="opacity: 0;">___</th>
@@ -44,17 +44,17 @@
           <a href="<%=chore.approved ? `/family/${child.id}/chores/unapprove/${chore.id}`: `/family/${child.id}/chores/approve/${chore.id}` %>"><input type="checkbox" <%= chore.approved ? checked="checked": ""%> ><label></label></a>
           <% } %>
           </td>
-          <td><a class="waves-effect waves-light btn-floating modal-trigger chore-edit" choreid="<%= chore.id %>" href="#edit-chore-modal"><i class="material-icons">edit</i></a></td>
-          <td><a class="waves-effect waves-light btn-floating modal-trigger chore-delete red" choreid="<%= chore.id %>" href="#delete-chore-modal"><i class="material-icons">delete_forever</i></a></td>
+          <td><a class="waves-effect waves-light btn-floating modal-trigger chore-edit light-green" choreid="<%= chore.id %>" href="#edit-chore-modal"><i class="material-icons">edit</i></a></td>
+          <td><a class="waves-effect waves-light btn-floating modal-trigger chore-delete red accent-4" choreid="<%= chore.id %>" href="#delete-chore-modal"><i class="material-icons">delete_forever</i></a></td>
         </tr>
       <% } %>
   </table>
 
 
 
-  <a style="margin: 1%;" class="waves-effect waves-light btn modal-trigger" href="#add-chore-modal">Add Chore<i class="material-icons right">add</i></a>
-  <a style="margin: 1%;" class="waves-effect waves-light btn modal-trigger" href="#edit-child-modal">Edit child<i class="material-icons right">edit</i></a>
-  <a style="margin: 1%;" class="btn waves-effect waves-light modal-trigger red" href="#delete-child-modal">Delete Child<i class="material-icons right">delete</i></a>
+  <a style="margin: 1%;" class="waves-effect waves-light btn modal-trigger light-green" href="#add-chore-modal">Add Chore<i class="material-icons right">add</i></a>
+  <a style="margin: 1%;" class="waves-effect waves-light btn modal-trigger light-green" href="#edit-child-modal">Edit child<i class="material-icons right">edit</i></a>
+  <a style="margin: 1%;" class="btn waves-effect waves-light modal-trigger red accent-4" href="#delete-child-modal">Delete Child<i class="material-icons right">delete</i></a>
 
 </div>
 
@@ -104,7 +104,7 @@
               </div>
             </div>
             <input type="text" name="child_id" value="<%= child.id %>" hidden>
-            <button class="btn" type="submit" tabindex="4">Update</button>
+            <button class="btn light-green" type="submit" tabindex="4">Update</button>
           </form>
         </div>
       </div>
@@ -147,7 +147,7 @@
               </div>
             </div>
             <input type="text" name="child_id" value="<%= child.id %>" hidden>
-            <button class="btn" type="submit" tabindex="4">Add Chore</button>
+            <button class="btn light-green" type="submit" tabindex="4">Add Chore</button>
           </form>
         </div>
       </div>
@@ -185,7 +185,7 @@
               </div>
             </div>
             <input type="text" name="id" value="<%= child.id %>" hidden>
-            <button class="btn" type="submit" tabindex="4">Update</button>
+            <button class="btn light-green" type="submit" tabindex="4">Update Child</button>
           </form>
         </div>
       </div>
@@ -199,7 +199,7 @@
           <h4>Are you sure?</h4>
         </div>
         <div class="row">
-          <a id="confirm-delete-btn" class="waves-effect waves-light btn red"><i class="material-icons right">delete_forever</i></a>
+          <a id="confirm-delete-btn" class="waves-effect waves-light btn red accent-4"><i class="material-icons right">delete_forever</i></a>
           <button class="waves-effect waves-light btn grey" onclick="$('#delete-chore-modal').modal('close');">Cancel</button>
         </div>
       </div>
@@ -213,7 +213,7 @@
           <h4>Are you sure?</h4>
         </div>
         <div class="row">
-          <a id="confirm-delete-btn" class="waves-effect waves-light btn red" href="/family/delete/<%= child.id %>">Delete <%= child.first_name %><i class="material-icons right">delete_forever</i></a>
+          <a id="confirm-delete-btn" class="waves-effect waves-light btn red accent-4" href="/family/delete/<%= child.id %>">Delete <%= child.first_name %><i class="material-icons right">delete_forever</i></a>
           <button class="waves-effect waves-light btn grey" onclick="$('#delete-child-modal').modal('close');">Cancel</button>
         </div>
       </div>

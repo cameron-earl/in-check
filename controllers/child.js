@@ -32,10 +32,18 @@ module.exports = {
                  let thisChore = chores.find(c=>c.id===completedChore.chore_id);
                  thisChore.completed = true;
                  thisChore.approved = completedChore.approved;
+                 thisChore.distributed = completedChore.distributed;
                }
 
-               //add chores for each child to child object
-               returnObj.chores = chores;
+               let pendingEarnings = chores
+                            .filter(chore=>chore.approved && !chore.distributed)
+                            .map(chore=>+chore.value);
+
+              returnObj.totalPendingEarnings = pendingEarnings.length ? pendingEarnings.reduce((a,b)=>a+b) : 0;
+              console.log(returnObj.totalPendingEarnings);
+              //add chores for each child to child object
+              returnObj.chores = chores;
+
 
                returnObj.child = child;
                req.session.save(err => {
