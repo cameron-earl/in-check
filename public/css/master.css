@@ -131,3 +131,8 @@ td
 {
     margin-bottom: 20px !important;
 }
+
+.card
+{
+    min-width: 230px !important;
+}
