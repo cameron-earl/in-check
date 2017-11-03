@@ -10,6 +10,7 @@ body
 
     min-height: 100vh;
     margin: 0;
+
     background-image: url('/images/gradient_squares.png');
     background-repeat: repeat;
 }
@@ -50,7 +51,11 @@ td > img
             transform: scale(2);
 }
 
-.chorelist{
-  font-family: 'Shadows Into Light', cursive;
-
+h1,
+h2,
+h3,
+h4,
+.brand-logo
+{
+    font-family: 'Shadows Into Light', cursive;
 }

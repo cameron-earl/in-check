@@ -7,7 +7,7 @@
 <script type="text/javascript" src="/js/child.js" defer></script>
 
 <div class= "container">
-  <h1><%= child.first_name %>: Chores</h1>
+  <h1><%= child.first_name %>'s Chores</h1>
 
   <table class="bordered">
         <thead>
@@ -15,8 +15,7 @@
               <th style="opacity: 0;">___</th>
               <th>Chore</th>
               <th>Description</th>
-              <th>Start</th>
-              <th>Completion Date</th>
+              <th>Deadline</th>
               <th>Value</th>
               <th>Completed</th>
           </tr>
@@ -28,7 +27,6 @@
               <td class="chore-icon"></td>
               <td class="chore-title"><%= chore.title %></td>
               <td><%= chore.description %></td>
-              <td><%= chore.start_date ? chore.start_date.toString().replace(/ \d{2}:.+$/,"") : "" %></td>
               <td><%= chore.end_date ? chore.end_date.toString().replace(/ \d{2}:.+$/,"") : "" %></td>
               <td><%= chore.value %></td>
               <td><a href="<%=chore.completed ? `/chores/uncomplete/${chore.id}`: `/chores/complete/${chore.id}` %>"><input type="checkbox" class= "" <%= chore.completed ? checked = "checked": ""%> ><label></label></a></td>
